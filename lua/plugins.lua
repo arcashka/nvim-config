@@ -4,12 +4,7 @@ local fn = vim.fn
 vim.g.package_home = fn.stdpath("data") .. "/site/pack/packer/"
 local packer_install_dir = vim.g.package_home .. "/opt/packer.nvim"
 
-local plug_url_format = ""
-if vim.g.is_linux then
-  plug_url_format = "https://hub.fastgit.org/%s"
-else
-  plug_url_format = "https://github.com/%s"
-end
+local plug_url_format = "https://github.com/%s"
 
 local packer_repo = string.format(plug_url_format, "wbthomason/packer.nvim")
 local install_cmd = string.format("10split |term git clone --depth=1 %s %s", packer_repo, packer_install_dir)
@@ -354,7 +349,23 @@ require("packer").startup({
 
     -- show and trim trailing whitespaces
     use {'jdhao/whitespace.nvim', event = 'VimEnter'}
+
+    -- MINE PLUGINS
+    use { 'preservim/nerdtree' }
+    use { 'nvim-telescope/telescope-ui-select.nvim' }
+    use({ 'Shatur/neovim-cmake',
+        requires = {
+            'nvim-lua/plenary.nvim',
+            'mfussenegger/nvim-dap',
+            'nvim-telescope/telescope.nvim'
+        },
+        config = function()
+            vim.defer_fn(function() require('config.neovim-cmake') end, 2000)
+        end
+    })
+--    require('Shatur/neovim-cmake').setup()
   end,
+
   config = {
     max_jobs = 16,
     compile_path = util.join_paths(vim.fn.stdpath('config'), 'lua', 'packer_compiled.lua'),

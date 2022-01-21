@@ -19,7 +19,7 @@ nnoremap <leader>p m`o<ESC>p``
 nnoremap <leader>P m`O<ESC>p``
 
 " Shortcut for faster save and quit
-nnoremap <silent> <leader>w :<C-U>update<CR>
+nnoremap <leader>w :<C-U>update<CR>
 " Saves the file if modified and quit
 nnoremap <silent> <leader>q :<C-U>x<CR>
 " Quit all opened buffers

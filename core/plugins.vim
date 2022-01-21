@@ -101,9 +101,7 @@ nnoremap <silent> <leader>fr :<C-U>Leaderf mru --popup<CR>
 
 let g:Lf_PopupColorscheme = 'gruvbox_material'
 
-" Change keybinding in LeaderF prompt mode, use ctrl-n and ctrl-p to navigate
-" items.
-let g:Lf_CommandMap = {'<C-J>': ['<C-N>'], '<C-K>': ['<C-P>']}
+" let g:Lf_CommandMap = {'<C-J>': ['<C-N>'], '<C-K>': ['<C-P>']}
 
 """"""""""""""""""""""""""""open-browser.vim settings"""""""""""""""""""
 if g:is_win || g:is_mac
@@ -125,7 +123,7 @@ let g:vista_echo_cursor = 0
 " Stay in current window when vista window is opened
 let g:vista_stay_on_open = 0
 
-nnoremap <silent> <Space>t :<C-U>Vista!!<CR>
+" nnoremap <silent> <Space>t :<C-U>Vista!!<CR>
 
 """"""""""""""""""""""""vim-mundo settings"""""""""""""""""""""""
 let g:mundo_verbose_graph = 0
@@ -422,3 +420,5 @@ function! s:wilder_init() abort
     echohl Error |echomsg "Wilder.nvim missing: run :PackerSync to fix."|echohl None
   endtry
 endfunction
+""""""""""""""""""""""""""""""NERDTree settings""""""""""""""""""""""""""""""
+nnoremap <C-n> : NERDTreeToggle<CR>
