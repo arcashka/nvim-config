@@ -353,17 +353,9 @@ require("packer").startup({
     -- MINE PLUGINS
     use { 'preservim/nerdtree' }
     use { 'nvim-telescope/telescope-ui-select.nvim' }
-    use({ 'Shatur/neovim-cmake',
-        requires = {
-            'nvim-lua/plenary.nvim',
-            'mfussenegger/nvim-dap',
-            'nvim-telescope/telescope.nvim'
-        },
-        config = function()
-            vim.defer_fn(function() require('config.neovim-cmake') end, 2000)
-        end
-    })
---    require('Shatur/neovim-cmake').setup()
+    use { 'mfussenegger/nvim-dap' }
+    use { 'Shatur/neovim-cmake' }
+
   end,
 
   config = {
