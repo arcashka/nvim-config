@@ -44,9 +44,7 @@ require("packer").startup({
     -- nvim-lsp configuration (it relies on cmp-nvim-lsp, so it should be loaded after cmp-nvim-lsp).
     use({ "neovim/nvim-lspconfig", after = "cmp-nvim-lsp", config = [[require('config.lsp')]] })
 
-    if vim.g.is_mac then
-      use({ "nvim-treesitter/nvim-treesitter", event = 'BufEnter', run = ":TSUpdate", config = [[require('config.treesitter')]] })
-    end
+    use({ "nvim-treesitter/nvim-treesitter", event = 'BufEnter', run = ":TSUpdate", config = [[require('config.treesitter')]] })
 
     -- Python indent (follows the PEP8 style)
     use({ "Vimjas/vim-python-pep8-indent", ft = { "python" } })
@@ -353,8 +351,12 @@ require("packer").startup({
     -- MINE PLUGINS
     use { 'preservim/nerdtree' }
     use { 'nvim-telescope/telescope-ui-select.nvim' }
-    use { 'mfussenegger/nvim-dap' }
-    use { 'Shatur/neovim-cmake' }
+    use { 'Shatur/neovim-cmake',
+        requires = {
+            { 'mfussenegger/nvim-dap' },
+            { 'nvim-lua/plenary.nvim' }
+        }
+    }
 
   end,
 

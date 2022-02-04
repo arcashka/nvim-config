@@ -23,7 +23,7 @@ local custom_attach = function(client, bufnr)
   local opts = { noremap = true, silent = true }
   buf_set_keymap("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
   buf_set_keymap("n", "<C-]>", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  buf_set_keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+  -- buf_set_keymap("n", "k", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
   buf_set_keymap("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
   buf_set_keymap("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
   buf_set_keymap("n", "<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
@@ -69,8 +69,15 @@ end
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(lsp.protocol.make_client_capabilities())
 capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.documentHighlight.semanticHighLighting = true
 
 local lspconfig = require("lspconfig")
+
+lspconfig.clangd.setup({
+  cmd = { "clangd", "--clang-tidy" },
+  on_attach = custom_attach,
+  capabilities = capabilities,
+})
 
 lspconfig.pylsp.setup({
   on_attach = custom_attach,
@@ -92,19 +99,21 @@ lspconfig.pylsp.setup({
   capabilities = capabilities,
 })
 
--- lspconfig.pyright.setup{
---   on_attach = custom_attach,
---   capabilities = capabilities
--- }
-
-lspconfig.clangd.setup({
-  on_attach = custom_attach,
-  capabilities = capabilities,
-  filetypes = { "c", "cpp", "cc" },
-  flags = {
-    debounce_text_changes = 500,
-  },
-})
+--local util = require'lspconfig.util'
+--
+--lspconfig.sourcekit.setup({
+--  on_attach = custom_attach,
+--  capabilities = capabilities,
+--  cmd = { "sourcekit-lsp", "--build-path", "/home/arcashka/Documents/projects/movavi/appcore-build-debug", "--sync" },
+--  filetypes = { "c", "cpp", "cc", "h" },
+--  flags = {
+--    debounce_text_changes = 500,
+--  },
+--  highlight = {
+--    IsRanges = true
+--  },
+--  root_dir = util.root_pattern("compile_commands.json")
+--})
 
 -- set up vim-language-server
 lspconfig.vimls.setup({
