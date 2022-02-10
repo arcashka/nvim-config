@@ -83,13 +83,6 @@ require("packer").startup({
     -- Stay after pressing * and search selected text
     use({"haya14busa/vim-asterisk", event = 'VimEnter'})
 
-    -- File search, tag search and more
-    if vim.g.is_win then
-      use({"Yggdroot/LeaderF", cmd = "Leaderf"})
-    else
-      use({ "Yggdroot/LeaderF", cmd = "Leaderf", run = ":LeaderfInstallCExtension" })
-    end
-
     use { 'nvim-telescope/telescope-ui-select.nvim' }
     use ({ 'nvim-telescope/telescope.nvim',
       cmd = 'Telescope',
@@ -350,6 +343,7 @@ require("packer").startup({
 
     -- MINE PLUGINS
     use { 'mfussenegger/nvim-dap', config = [[require('config.nvim-dap')]] }
+    use { "rcarriga/nvim-dap-ui", config = [[require('config.nvim-dap-ui')]] }
     use { 'preservim/nerdtree' }
     use ({ 'arcashka/neovim-cmake',
       branch = 'fix_select_target_with_telescope',
