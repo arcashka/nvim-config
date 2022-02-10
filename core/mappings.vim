@@ -54,8 +54,6 @@ nnoremap <Space><Space> a<Space><ESC>h
 " Move the cursor based on physical lines, not the actual lines.
 nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
-nnoremap ^ g^
-nnoremap 0 g0
 
 " Do not include white space characters when using $ in visual mode,
 " see https://vi.stackexchange.com/q/12607/15292

@@ -90,10 +90,15 @@ require("packer").startup({
       use({ "Yggdroot/LeaderF", cmd = "Leaderf", run = ":LeaderfInstallCExtension" })
     end
 
-    use {
-      'nvim-telescope/telescope.nvim', cmd = 'Telescope',
-      requires = { {'nvim-lua/plenary.nvim'} }
-    }
+    use { 'nvim-telescope/telescope-ui-select.nvim' }
+    use ({ 'nvim-telescope/telescope.nvim',
+      cmd = 'Telescope',
+      requires = {
+        { 'nvim-lua/plenary.nvim' }
+      },
+      config = [[require('config.nvim-telescope')]],
+      event = "VimEnter",
+    })
     -- search emoji and other symbols
     use {'nvim-telescope/telescope-symbols.nvim', after = 'telescope.nvim'}
 
@@ -322,11 +327,6 @@ require("packer").startup({
       })
     end
 
-    -- Debugger plugin
-    if vim.g.is_win or vim.g.is_linux then
-      use({ "sakhnik/nvim-gdb", run = { "bash install.sh" }, opt = true, setup = [[vim.cmd('packadd nvim-gdb')]] })
-    end
-
     -- Session management plugin
     use({"tpope/vim-obsession", cmd = 'Obsession'})
 
@@ -349,14 +349,16 @@ require("packer").startup({
     use {'jdhao/whitespace.nvim', event = 'VimEnter'}
 
     -- MINE PLUGINS
+    use { 'mfussenegger/nvim-dap', config = [[require('config.nvim-dap')]] }
     use { 'preservim/nerdtree' }
-    use { 'nvim-telescope/telescope-ui-select.nvim' }
-    use { 'Shatur/neovim-cmake',
-        requires = {
-            { 'mfussenegger/nvim-dap' },
-            { 'nvim-lua/plenary.nvim' }
-        }
-    }
+    use ({ 'arcashka/neovim-cmake',
+      branch = 'fix_select_target_with_telescope',
+      requires = {
+        { 'nvim-lua/plenary.nvim' }
+      },
+      config = [[require('config.neovim-cmake')]],
+      event = "VimEnter"
+    })
 
   end,
 

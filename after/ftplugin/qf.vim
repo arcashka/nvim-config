@@ -1,6 +1,8 @@
-" Set quickfix window height, see also https://github.com/lervag/vimtex/issues/1127
-function! AdjustWindowHeight(minheight, maxheight)
-  execute max([a:minheight, min([line('$'), a:maxheight])]) . 'wincmd _'
-endfunction
+augroup quickfix_autocmds
+  autocmd!
+  autocmd BufReadPost quickfix call AdjustWindowHeight(10, 30)
+augroup END
 
-call AdjustWindowHeight(5, 15)
+function! AdjustWindowHeight(minheight, maxheight)
+  execute max([a:minheight, min([line('$') + 1, a:maxheight])]) . 'wincmd _'
+endfunction

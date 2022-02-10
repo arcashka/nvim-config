@@ -51,9 +51,6 @@ if g:is_linux
   let g:Lf_ShowDevIcons = 0
 endif
 
-" Only fuzzy-search files names
-let g:Lf_DefaultMode = 'NameOnly'
-
 " Popup window settings
 let w = float2nr(&columns * 0.8)
 if w > 140
@@ -372,9 +369,6 @@ if exists('g:started_by_firenvim') && g:started_by_firenvim
   augroup END
 endif
 
-""""""""""""""""""""""""""""""nvim-gdb settings""""""""""""""""""""""""""""""
-nnoremap <leader>dp :<C-U>GdbStartPDB python -m pdb %<CR>
-
 """"""""""""""""""""""""""""""wilder.nvim settings""""""""""""""""""""""""""""""
 augroup wilder_init
   autocmd!
@@ -421,4 +415,16 @@ function! s:wilder_init() abort
   endtry
 endfunction
 """"""""""""""""""""""""""""""NERDTree settings""""""""""""""""""""""""""""""
-nnoremap <C-n> : NERDTreeToggle<CR>
+nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <leader>r :NERDTreeFind<CR>
+
+"""""""""""""""""""""""""""""""""dap settings""""""""""""""""""""""""""""""
+nnoremap <silent> <F5> :lua require'dap'.continue()<CR>
+nnoremap <silent> <F10> :lua require'dap'.step_over()<CR>
+nnoremap <silent> <F11> :lua require'dap'.step_into()<CR>
+nnoremap <silent> <F12> :lua require'dap'.step_out()<CR>
+nnoremap <silent> <leader>b :lua require'dap'.toggle_breakpoint()<CR>
+nnoremap <silent> <leader>B :lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
+nnoremap <silent> <leader>lp :lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
+nnoremap <silent> <leader>dr :lua require'dap'.repl.open()<CR>
+nnoremap <silent> <leader>dl :lua require'dap'.run_last()<CR>

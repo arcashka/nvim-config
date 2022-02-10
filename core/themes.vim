@@ -7,7 +7,7 @@ function! s:theme_setup_dict.gruvbox8() dict abort
   let g:gruvbox_italicize_strings=1
   let g:gruvbox_filetype_hi_groups = 1
   let g:gruvbox_plugin_hi_groups = 1
-  colorscheme gruvbox8_hard
+  colorscheme gruvbox-material
 endfunction
 
 function! s:theme_setup_dict.onedark() dict abort
