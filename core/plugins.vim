@@ -37,16 +37,6 @@ nnoremap <leader>fl <cmd>Telescope current_buffer_fuzzy_find<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
-""""""""""""""""""""""""""""open-browser.vim settings"""""""""""""""""""
-if g:is_win || g:is_mac
-  " Disable netrw's gx mapping.
-  let g:netrw_nogx = 1
-
-  " Use another mapping for the open URL method
-  nmap ob <Plug>(openbrowser-smart-search)
-  xmap ob <Plug>(openbrowser-smart-search)
-endif
-
 """"""""""""""""""""""""""" vista settings """"""""""""""""""""""""""""""""""
 let g:vista#renderer#icons = {
       \ 'member': '',
@@ -64,31 +54,6 @@ let g:mundo_verbose_graph = 0
 let g:mundo_width = 80
 
 nnoremap <silent> <Space>u :MundoToggle<CR>
-
-""""""""""""""""""""""""""""vim-yoink settings"""""""""""""""""""""""""
-if g:is_win || g:is_mac
-  " ctrl-n and ctrl-p will not work if you add the TextChanged event to vim-auto-save events.
-  " nmap <c-n> <plug>(YoinkPostPasteSwapBack)
-  " nmap <c-p> <plug>(YoinkPostPasteSwapForward)
-
-  " The following p/P mappings are also needed for ctrl-n and ctrl-p to work
-  " nmap p <plug>(YoinkPaste_p)
-  " nmap P <plug>(YoinkPaste_P)
-
-  " Cycle the yank stack with the following mappings
-  nmap [y <plug>(YoinkRotateBack)
-  nmap ]y <plug>(YoinkRotateForward)
-
-  " Do not change the cursor position
-  nmap y <plug>(YoinkYankPreserveCursorPosition)
-  xmap y <plug>(YoinkYankPreserveCursorPosition)
-
-  " Move cursor to end of paste after multiline paste
-  let g:yoinkMoveCursorToEndOfPaste = 0
-
-  " Record yanks in system clipboard
-  let g:yoinkSyncSystemClipboardOnFocus = 1
-endif
 
 """"""""""""""""""""""""""""better-escape.vim settings"""""""""""""""""""""""""
 let g:better_escape_interval = 200
@@ -145,17 +110,6 @@ let g:vim_markdown_json_frontmatter = 1  " for JSON format
 " Let the TOC window autofit so that it doesn't take too much space
 let g:vim_markdown_toc_autofit = 1
 
-"""""""""""""""""""""""""markdown-preview settings"""""""""""""""""""
-" Only setting this for suitable platforms
-if g:is_win || g:is_mac
-  " Do not close the preview tab when switching to other buffers
-  let g:mkdp_auto_close = 0
-
-  " Shortcuts to start and stop markdown previewing
-  nnoremap <silent> <M-m> :<C-U>MarkdownPreview<CR>
-  nnoremap <silent> <M-S-m> :<C-U>MarkdownPreviewStop<CR>
-endif
-
 """"""""""""""""""""""""vim-grammarous settings""""""""""""""""""""""""""""""
 if g:is_mac
   let g:grammarous#languagetool_cmd = 'languagetool'
@@ -186,69 +140,6 @@ nmap ga <Plug>(UnicodeGA)
 nmap s <Nop>
 omap s <Nop>
 
-""""""""""""""""""""""""""""vimtex settings"""""""""""""""""""""""""""""
-if ( g:is_win || g:is_mac ) && executable('latex')
-  " Hacks for inverse serach to work semi-automatically,
-  " see https://jdhao.github.io/2021/02/20/inverse_search_setup_neovim_vimtex/.
-  function! s:write_server_name() abort
-    let nvim_server_file = (has('win32') ? $TEMP : '/tmp') . '/vimtexserver.txt'
-    call writefile([v:servername], nvim_server_file)
-  endfunction
-
-  augroup vimtex_common
-    autocmd!
-    autocmd FileType tex call s:write_server_name()
-    autocmd FileType tex nmap <buffer> <F9> <plug>(vimtex-compile)
-  augroup END
-
-  let g:vimtex_compiler_latexmk = {
-        \ 'build_dir' : 'build',
-        \ }
-
-  " TOC settings
-  let g:vimtex_toc_config = {
-        \ 'name' : 'TOC',
-        \ 'layers' : ['content', 'todo', 'include'],
-        \ 'resize' : 1,
-        \ 'split_width' : 30,
-        \ 'todo_sorted' : 0,
-        \ 'show_help' : 1,
-        \ 'show_numbers' : 1,
-        \ 'mode' : 2,
-        \ }
-
-  " Viewer settings for different platforms
-  if g:is_win
-    let g:vimtex_view_general_viewer = 'SumatraPDF'
-    let g:vimtex_view_general_options_latexmk = '-reuse-instance'
-    let g:vimtex_view_general_options = '-reuse-instance -forward-search @tex @line @pdf'
-  endif
-
-  if g:is_mac
-    " let g:vimtex_view_method = "skim"
-    let g:vimtex_view_general_viewer = '/Applications/Skim.app/Contents/SharedSupport/displayline'
-    let g:vimtex_view_general_options = '-r @line @pdf @tex'
-
-    augroup vimtex_mac
-      autocmd!
-      autocmd User VimtexEventCompileSuccess call UpdateSkim()
-    augroup END
-
-    " The following code is adapted from https://gist.github.com/skulumani/7ea00478c63193a832a6d3f2e661a536.
-    function! UpdateSkim() abort
-      let l:out = b:vimtex.out()
-      let l:src_file_path = expand('%:p')
-      let l:cmd = [g:vimtex_view_general_viewer, '-r']
-
-      if !empty(system('pgrep Skim'))
-        call extend(l:cmd, ['-g'])
-      endif
-
-      call jobstart(l:cmd + [line('.'), l:out, l:src_file_path])
-    endfunction
-  endif
-endif
-
 """"""""""""""""""""""""""""vim-startify settings""""""""""""""""""""""""""""
 " Do not change working directory when opening files.
 let g:startify_change_to_dir = 0
@@ -268,14 +159,6 @@ let g:matchup_delim_noskips = 0
 
 " Show offscreen match pair in popup window
 let g:matchup_matchparen_offscreen = {'method': 'popup'}
-
-"""""""""""""""""""""""""" asyncrun.vim settings """"""""""""""""""""""""""
-" Automatically open quickfix window of 6 line tall after asyncrun starts
-let g:asyncrun_open = 6
-if g:is_win
-  " Command output encoding for Windows
-  let g:asyncrun_encs = 'gbk'
-endif
 
 """"""""""""""""""""""""""""""firenvim settings""""""""""""""""""""""""""""""
 if exists('g:started_by_firenvim') && g:started_by_firenvim

@@ -77,7 +77,7 @@ require("packer").startup({
       'kevinhwang91/nvim-hlslens',
       branch = 'main',
       keys = {{'n', '*'}, {'n', '#'}, {'n', 'n'}, {'n', 'N'}},
-      config = [[require('config.hlslens')]]
+      config = [[require('config._hlslens')]]
     }
 
     -- Stay after pressing * and search selected text
@@ -152,13 +152,6 @@ require("packer").startup({
       end
     })
 
-    -- For Windows and Mac, we can open an URL in the browser. For Linux, it may
-    -- not be possible since we maybe in a server which disables GUI.
-    if vim.g.is_win or vim.g.is_mac then
-      -- open URL in browser
-      use({"tyru/open-browser.vim", event = "VimEnter"})
-    end
-
     -- Only install these plugins if ctags are installed on the system
     if utils.executable("ctags") then
       -- show file tags in vim window
@@ -190,11 +183,6 @@ require("packer").startup({
     -- Show undo history visually
     use({"simnalamburt/vim-mundo", cmd = {"MundoToggle", "MundoShow"}})
 
-    -- Manage your yank history
-    if vim.g.is_win or vim.g.is_mac then
-      use({"svermeulen/vim-yoink", event = "VimEnter"})
-    end
-
     -- Handy unix command inside Vim (Rename, Move etc.)
     use({"tpope/vim-eunuch", cmd = {"Rename", "Delete"}})
 
@@ -204,12 +192,6 @@ require("packer").startup({
     -- Show the content of register in preview window
     -- Plug 'junegunn/vim-peekaboo'
     use({ "jdhao/better-escape.vim", event = { "InsertEnter" } })
-
-    if vim.g.is_mac then
-      use({ "lyokha/vim-xkbswitch", event = { "InsertEnter" } })
-    elseif vim.g.is_win then
-      use({ "Neur1n/neuims", event = { "InsertEnter" } })
-    end
 
     -- Syntax check and make
     -- use 'neomake/neomake'
@@ -243,17 +225,6 @@ require("packer").startup({
     -- Markdown JSON header highlight plugin
     use({ "elzr/vim-json", ft = { "json", "markdown" } })
 
-    -- Markdown previewing (only for Mac and Windows)
-    if vim.g.is_win or vim.g.is_mac then
-      use({
-        "iamcco/markdown-preview.nvim",
-        run = function()
-          fn["mkdp#util#install"]()
-        end,
-        ft = { "markdown" },
-      })
-    end
-
     use({'folke/zen-mode.nvim', cmd = 'ZenMode', config = [[require('config.zen-mode')]]})
 
     if vim.g.is_mac then
@@ -272,14 +243,6 @@ require("packer").startup({
 
     -- Add indent object for vim (useful for languages like Python)
     use({"michaeljsmith/vim-indent-object", event = "VimEnter"})
-
-    -- Only use these plugin on Windows and Mac and when LaTeX is installed
-    if vim.g.is_win or vim.g.is_mac and utils.executable("latex") then
-      use({ "lervag/vimtex", ft = { "tex" } })
-
-      -- use {'matze/vim-tex-fold', ft = {'tex', }}
-      -- use 'Konfekt/FastFold'
-    end
 
     -- Since tmux is only available on Linux and Mac, we only enable these plugins
     -- for Linux and Mac
@@ -309,16 +272,6 @@ require("packer").startup({
     -- Plug 'tpope/vim-dispatch'
 
     use({ "cespare/vim-toml", ft = { "toml" }, branch = "main" })
-
-    -- Edit text area in browser using nvim
-    if vim.g.is_win or vim.g.is_mac then
-      use({
-        "glacambre/firenvim",
-        run = function() fn["firenvim#install"](0) end,
-        opt = true,
-        setup = [[vim.cmd('packadd firenvim')]],
-      })
-    end
 
     -- Session management plugin
     use({"tpope/vim-obsession", cmd = 'Obsession'})

@@ -24,11 +24,7 @@ let g:did_install_default_menus = 1  " do not load menu
 " Path to Python 3 interpreter (must be an absolute path), make startup
 " faster. See https://neovim.io/doc/user/provider.html.
 if executable('python')
-   if g:is_win
-    let g:python3_host_prog=substitute(exepath('python'), '.exe$', '', 'g')
-  elseif g:is_linux || g:is_mac
-    let g:python3_host_prog=exepath('python')
-  endif
+  let g:python3_host_prog=exepath('python')
 else
   echoerr 'Python 3 executable not found! You must install Python 3 and set its PATH correctly!'
 endif
@@ -49,9 +45,6 @@ language en_US.utf-8
 " let g:loaded_netrw       = 0
 " let g:loaded_netrwPlugin = 0
 let g:netrw_liststyle = 3
-if g:is_win
-  let g:netrw_http_cmd = 'curl --ssl-no-revoke -Lo'
-endif
 
 " Do not load tohtml.vim
 let g:loaded_2html_plugin = 1

@@ -1,4 +1,5 @@
 local Path = require('plenary.path')
+
 require('cmake').setup({
   cmake_executable = 'cmake',
   parameters_file = 'CMakeSettings.json',
