@@ -1,7 +1,13 @@
 local dap = require('dap')
+
+local platform_lldb_vscode = '/usr/bin/lldb-vscode'
+if vim.g.is_win then
+  platform_lldb_vscode = 'C:/Program Files/LLVM/bin/lldb-vscode.exe'
+end
+
 dap.adapters.lldb = {
   type = 'executable',
-  command = '/usr/bin/lldb-vscode',
+  command = platform_lldb_vscode,
   name = "lldb"
 }
 

@@ -87,7 +87,7 @@ require("packer").startup({
     use ({ 'nvim-telescope/telescope.nvim',
       cmd = 'Telescope',
       requires = {
-        { 'nvim-lua/plenary.nvim' }
+        { 'arcashka/plenary.nvim', branch = 'windows_path_absolute_fixes' }
       },
       config = [[require('config.nvim-telescope')]],
       event = "VimEnter",
@@ -301,7 +301,7 @@ require("packer").startup({
     use ({ 'arcashka/neovim-cmake',
       branch = 'fix_select_target_with_telescope',
       requires = {
-        { 'nvim-lua/plenary.nvim' }
+        { 'arcashka/plenary.nvim', branch = 'windows_path_absolute_fixes' }
       },
       config = [[require('config.neovim-cmake')]],
       event = "VimEnter"
