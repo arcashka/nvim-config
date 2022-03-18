@@ -35,13 +35,27 @@ nnoremap <silent> ]q :<C-U>cnext<CR>zv
 nnoremap <silent> [Q :<C-U>cfirst<CR>zv
 nnoremap <silent> ]Q :<C-U>clast<CR>zv
 
+function! BSkipQuickFix(command)
+  let start_buffer = bufnr('%')
+  execute a:command
+  while &buftype ==# 'quickfix' && bufnr('%') != start_buffer
+    execute a:command
+  endwhile
+endfunction
+
+nnoremap<silent> <Tab> :call BSkipQuickFix("bn")<CR>
+nnoremap<silent> <S-Tab> :call BSkipQuickFix("bp")<CR>
+
+" Close all buffers except current one
+nnoremap \D : %bd<CR><C-O>:bd#<CR>
+
 " Close location list or quickfix list if they are present,
 " see https://superuser.com/q/355325/736190
 nnoremap<silent> \x :<C-U>windo lclose <bar> cclose<CR>
 
 " Close a buffer and switching to another buffer, do not close the
 " window, see https://stackoverflow.com/q/4465095/6064933
-nnoremap <silent> \d :<C-U>bprevious <bar> bdelete #<CR>
+nnoremap <silent> \d :<C-U>call BSkipQuickFix("bprevious") <bar> bdelete #<CR>
 
 " Insert a blank line below or above current line (do not move the cursor),
 " see https://stackoverflow.com/a/16136133/6064933
@@ -58,9 +72,6 @@ nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
 " Do not include white space characters when using $ in visual mode,
 " see https://vi.stackexchange.com/q/12607/15292
 xnoremap $ g_
-
-" Jump to matching pairs easily in normal mode
-nnoremap <Tab> %
 
 " Go to start or end of line easier
 nnoremap H ^
@@ -148,9 +159,6 @@ xnoremap <silent> <A-j> :<C-U>call utils#MoveSelection('down')<CR>
 " register, see also https://stackoverflow.com/q/10723700/6064933.
 xnoremap p "_c<ESC>p
 
-nnoremap <silent> gb :<C-U>call buf_utils#GoToBuffer(v:count, 'forward')<CR>
-nnoremap <silent> gB :<C-U>call buf_utils#GoToBuffer(v:count, 'backward')<CR>
-
 nnoremap <Left> <C-W>h
 nnoremap <Right> <C-W>l
 nnoremap <Up> <C-W>k
@@ -174,6 +182,14 @@ endfor
 
 " insert semicolon in the end
 inoremap <A-;> <ESC>miA;<ESC>`ii
+
+
+if g:is_linux
+  nnoremap <A-F> :py3f /usr/share/clang/clang-format.py<CR>
+  xnoremap <A-F> :py3f /usr/share/clang/clang-format.py<CR>
+  nnoremap <A-f> :%py3f /usr/share/clang/clang-format.py<CR>
+  xnoremap <A-f> :%py3f /usr/share/clang/clang-format.py<CR>
+endif
 
 " Keep cursor position after yanking
 nnoremap y myy

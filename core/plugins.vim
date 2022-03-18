@@ -64,12 +64,10 @@ let g:XkbSwitchEnabled = 1
 """""""""""""""""""""""""""""" neoformat settings """""""""""""""""""""""
 let g:neoformat_enabled_python = ['black', 'yapf']
 let g:neoformat_cpp_clangformat = {
-      \ 'exe': 'clang-format',
-      \ 'args': ['--style="{IndentWidth: 4}"']
+      \ 'exe': 'clang-format'
       \ }
 let g:neoformat_c_clangformat = {
       \ 'exe': 'clang-format',
-      \ 'args': ['--style="{IndentWidth: 4}"']
       \ }
 
 let g:neoformat_enabled_cpp = ['clangformat']
@@ -234,6 +232,15 @@ function! s:wilder_init() abort
     echohl Error |echomsg "Wilder.nvim missing: run :PackerSync to fix."|echohl None
   endtry
 endfunction
+""""""""""""""""""""""""""""""bufferline settings"""""""""""""""""""""""""
+nnoremap <space>b :BufferLinePick<CR>
+nnoremap <space>B :BufferLinePickClose<CR>
+
+""""""""""""""""""""""""""""""CMake settings""""""""""""""""""""""""""""""
+nnoremap <C-b>b :CMake build<CR>
+nnoremap <C-b>c :CMake configure<CR>
+nnoremap <C-b>t :CMake select_target<CR>
+nnoremap <C-b>r :CMake run<CR>
 """"""""""""""""""""""""""""""NERDTree settings""""""""""""""""""""""""""""""
 nnoremap <C-n> :NERDTreeToggle<CR>
 nnoremap <leader>r :NERDTreeFind<CR>

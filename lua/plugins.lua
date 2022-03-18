@@ -197,7 +197,7 @@ require("packer").startup({
     -- use 'neomake/neomake'
 
     -- Auto format tools
-    use({ "sbdchd/neoformat", cmd = { "Neoformat" } })
+    use({ "arcashka/neoformat", branch = "clang_format", cmd = { "Neoformat" } })
     -- use 'Chiel92/vim-autoformat'
 
     -- Git command inside vim
