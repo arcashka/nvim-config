@@ -10,5 +10,5 @@ if exists('g:GuiLoaded')
   GuiTabline 0
   GuiPopupmenu 0
   GuiLinespace 2
-  GuiFont! Iosevka\ NF:h14
+  GuiFont! agave\ NF:h13:l
 endif

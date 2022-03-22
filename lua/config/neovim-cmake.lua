@@ -5,10 +5,7 @@ if not vim.g.is_win then
   platform_configure_args = { '-G', 'Ninja', '-DCMAKE_CXX_COMPILER=clang++', '-DCMAKE_C_COMPILER=clang' }
 else
   platform_configure_args = {
-      '-G', 'Visual Studio 16 2019',
---    '-DCMAKE_MAKE_PROGRAM=C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe',
---    '-DCMAKE_CXX_COMPILER=C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.29.30133/bin/Hostx64/x64/cl.exe',
---    '-DCMAKE_C_COMPILER=C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.29.30133/bin/Hostx64/x64/cl.exe',
+      '-G', 'Ninja',
   }
 end
 
