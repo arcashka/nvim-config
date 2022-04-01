@@ -16,6 +16,6 @@ require('cmake').setup({
   configure_args = { '-DCMAKE_EXPORT_COMPILE_COMMANDS=1', unpack(platform_configure_args) },
   build_args = { '-j', '10' },
   quickfix_height = 10,
-  dap_configuration = { type = 'lldb', request = 'launch' },
+  dap_configuration = { type = 'cppdbg', request = 'launch' },
   dap_open_command = require('dap').repl.open,
 })
