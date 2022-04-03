@@ -238,6 +238,7 @@ nnoremap <space>B :BufferLinePickClose<CR>
 
 """"""""""""""""""""""""""""""CMake settings""""""""""""""""""""""""""""""
 nnoremap <C-b>b :CMake build<CR>
+nnoremap <C-b>B :CMake build_all<CR>
 nnoremap <C-b>c :CMake configure<CR>
 nnoremap <C-b>t :CMake select_target<CR>
 nnoremap <C-b>r :CMake run<CR>
