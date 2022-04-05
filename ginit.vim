@@ -10,5 +10,9 @@ if exists('g:GuiLoaded')
   GuiTabline 0
   GuiPopupmenu 0
   GuiLinespace 2
-  GuiFont! agave\ NF:h13:l
+  if g:is_mac
+    GuiFont! agave\ NF:h16:l
+  else
+    GuiFont! agave\ NF:h13:l
+  endif
 endif

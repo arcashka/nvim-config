@@ -261,5 +261,9 @@ nnoremap <silent> <leader>dl :lua require'dap'.run_last()<CR>
 nnoremap <silent> <F2> :lua require'dapui'.toggle()<CR>
 
 """""""""""""""""""""""""""""""clangd settings"""""""""""""""""""""""""""""
-nnoremap <silent> <A-o> :ClangdSwitchSourceHeader<CR>
+if g:is_mac
+  nnoremap <silent> ø :ClangdSwitchSourceHeader<CR>
+else
+  nnoremap <silent> <A-o> :ClangdSwitchSourceHeader<CR>
+endif
 

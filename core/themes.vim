@@ -69,7 +69,7 @@ let s:theme2dir = {
       \ 'kanagawa': 'kanagawa.nvim',
       \ }
 
-if g:is_win
+if g:is_win || g:is_mac
   let s:theme = 'gruvbox_material'
 else
   let s:theme = 'sonokai'

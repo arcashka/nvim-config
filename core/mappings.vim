@@ -148,12 +148,22 @@ nnoremap <silent> <leader>y :<C-U>%y<CR>
 nnoremap <silent> <leader>cl :<C-U>call utils#ToggleCursorCol()<CR>
 
 " Move current line up and down
-nnoremap <silent> <A-k> <Cmd>call utils#SwitchLine(line('.'), 'up')<CR>
-nnoremap <silent> <A-j> <Cmd>call utils#SwitchLine(line('.'), 'down')<CR>
+if g:is_mac
+  nnoremap <silent> ˚ <Cmd>call utils#SwitchLine(line('.'), 'up')<CR>
+  nnoremap <silent> ∆ <Cmd>call utils#SwitchLine(line('.'), 'down')<CR>
+else
+  nnoremap <silent> <A-k> <Cmd>call utils#SwitchLine(line('.'), 'up')<CR>
+  nnoremap <silent> <A-j> <Cmd>call utils#SwitchLine(line('.'), 'down')<CR>
+endif
 
 " Move current visual-line selection up and down
-xnoremap <silent> <A-k> :<C-U>call utils#MoveSelection('up')<CR>
-xnoremap <silent> <A-j> :<C-U>call utils#MoveSelection('down')<CR>
+if g:is_mac
+  xnoremap <silent> ˚ :<C-U>call utils#MoveSelection('up')<CR>
+  xnoremap <silent> ∆ :<C-U>call utils#MoveSelection('down')<CR>
+else
+  xnoremap <silent> <A-k> :<C-U>call utils#MoveSelection('up')<CR>
+  xnoremap <silent> <A-j> :<C-U>call utils#MoveSelection('down')<CR>
+endif
 
 " Replace visual selection with text in register, but not contaminate the
 " register, see also https://stackoverflow.com/q/10723700/6064933.
@@ -181,10 +191,18 @@ for ch in [',', '.', '!', '?', ';', ':']
 endfor
 
 " insert semicolon in the end
-inoremap <A-;> <ESC>miA;<ESC>`ii
+if g:is_mac
+  inoremap … <ESC>miA;<ESC>`ii
+else
+  inoremap <A-;> <ESC>miA;<ESC>`ii
+endif
 
-
-if g:is_linux
+if g:is_mac
+  nnoremap Ï :py3f /usr/local/opt/llvm/share/clang/clang-format.py<CR>
+  xnoremap Ï :py3f /usr/local/opt/llvm/share/clang/clang-format.py<CR>
+  nnoremap ƒ :%py3f /usr/local/opt/llvm/share/clang/clang-format.py<CR>
+  xnoremap ƒ :%py3f /usr/local/opt/llvm/share/clang/clang-format.py<CR>
+elseif g:is_linux
   nnoremap <A-F> :py3f /usr/share/clang/clang-format.py<CR>
   xnoremap <A-F> :py3f /usr/share/clang/clang-format.py<CR>
   nnoremap <A-f> :%py3f /usr/share/clang/clang-format.py<CR>
