@@ -5,8 +5,8 @@ require("neoscroll").setup({
 local t = {}
 -- Syntax: t[keys] = {function, {function arguments}}
 -- Use the "sine" easing function
-t["<C-u>"] = { "scroll", { "-vim.wo.scroll", "true", "20", [['cubic']] } }
-t["<C-d>"] = { "scroll", { "vim.wo.scroll", "true", "20", [['cubic']] } }
+t["<C-k>"] = { "scroll", { "-vim.wo.scroll", "true", "0", [['cubic']] } }
+t["<C-j>"] = { "scroll", { "vim.wo.scroll", "true", "0", [['cubic']] } }
 -- Use the "circular" easing function
 -- t["<C-b>"] = { "scroll", { "-vim.api.nvim_win_get_height(0)", "true", "50", [['cubic']] } }
 -- t["<C-f>"] = { "scroll", { "vim.api.nvim_win_get_height(0)", "true", "50", [['cubic']] } }

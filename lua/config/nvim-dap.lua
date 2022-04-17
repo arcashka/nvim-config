@@ -1,20 +1,17 @@
 local dap = require('dap')
 
-local platform_lldb_vscode = '/usr/bin/lldb-vscode'
-if vim.g.is_win then
-  platform_lldb_vscode = 'C:/Program Files/LLVM/bin/lldb-vscode.exe'
+
+local platform_lldb_vscode = 'C:/Program Files/LLVM/bin/lldb-vscode.exe'
+if vim.g.is_mac then
+  platform_lldb_vscode = '/usr/local/Cellar/llvm/13.0.1_1/bin/lldb-vscode'
+elseif vim.g.is_linux then
+  platform_lldb_vscode = '/usr/bin/lldb-vscode'
 end
 
 dap.adapters.lldb = {
   type = 'executable',
   command = platform_lldb_vscode,
   name = "lldb"
-}
-
-dap.adapters.cppdbg = {
-  id = 'cppdbg',
-  type = 'executable',
-  command = 'C://Users//arcashka//.vscode//extensions//ms-vscode.cpptools-1.9.5//debugAdapters//bin//OpenDebugAD7.exe',
 }
 
 dap.configurations.cpp = {
@@ -29,21 +26,28 @@ dap.configurations.cpp = {
     stopOnEntry = false,
     args = {},
     runInTerminal = false,
+    -- postRunCommands = {'process handle -p true -s false -n false SIGWINCH'}
   },
 }
 
-dap.configurations.cpp = {
-  {
-    name = "Launch file",
-    type = "cppdbg",
-    request = "launch",
-    program = function()
-      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-    end,
-    cwd = '${workspaceFolder}',
-    stopOnEntry = false,
-    MIMode = 'gdb',
-    MIDebuggerPath = 'gdb.exe',
-  }
-}
+-- dap.adapters.cppdbg = {
+--   id = 'cppdbg',
+--   type = 'executable',
+--   command = 'C://Users//arcashka//.vscode//extensions//ms-vscode.cpptools-1.9.5//debugAdapters//bin//OpenDebugAD7.exe',
+-- }
+
+-- dap.configurations.cpp = {
+--   {
+--     name = "Launch file",
+--     type = "cppdbg",
+--     request = "launch",
+--     program = function()
+--       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+--     end,
+--     cwd = '${workspaceFolder}',
+--     stopOnEntry = false,
+--     MIMode = 'gdb',
+--     MIDebuggerPath = 'gdb.exe',
+--   }
+-- }
 
