@@ -129,7 +129,7 @@ require("packer").startup({
       config = [[require('config.statusline')]]
     }
 
-    use({ "akinsho/bufferline.nvim", event = "VimEnter", config = [[require('config.bufferline')]] })
+    use({ "akinsho/bufferline.nvim", branch = "main", event = "VimEnter", config = [[require('config.bufferline')]] })
 
     -- fancy start screen
     use { 'goolord/alpha-nvim', event = 'VimEnter', config = [[require('config.alpha-nvim')]] }

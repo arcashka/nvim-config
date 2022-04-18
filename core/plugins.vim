@@ -33,6 +33,7 @@ command! -nargs=0 StartVlime call jobstart(printf("sbcl --load %s/vlime/lisp/sta
 """""""""""""""""""""""""""""Telescope settings"""""""""""""""""""""
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fG <cmd>Telescope grep_string<cr>
 nnoremap <leader>fl <cmd>Telescope current_buffer_fuzzy_find<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
