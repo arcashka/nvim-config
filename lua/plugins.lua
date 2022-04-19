@@ -84,6 +84,17 @@ require("packer").startup({
     use({"haya14busa/vim-asterisk", event = 'VimEnter'})
 
     use { 'nvim-telescope/telescope-ui-select.nvim' }
+    if not vim.g.is_win then
+      use {
+        'nvim-telescope/telescope-frecency.nvim',
+        requires = {
+          {
+            'tami5/sqlite.lua', rocks = { 'sqlite', 'luv' }
+          }
+        }
+      }
+    end
+    use { 'nvim-telescope/telescope-live-grep-raw.nvim' }
     use ({ 'nvim-telescope/telescope.nvim',
       cmd = 'Telescope',
       requires = {
