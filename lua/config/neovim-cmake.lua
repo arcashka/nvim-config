@@ -9,7 +9,7 @@ if vim.g.is_mac then
   dap_configuration = 'lldb'
 elseif vim.g.is_linux then
   platform_configure_args = { '-G', 'Ninja', '-DCMAKE_CXX_COMPILER=clang++', '-DCMAKE_C_COMPILER=clang' }
-  dap_configuration = 'cppdbg'
+  dap_configuration = 'lldb'
 elseif vim.g.is_win then
   platform_configure_args = {
       '-G', 'Ninja',
