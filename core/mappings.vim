@@ -198,10 +198,10 @@ else
 endif
 
 if g:is_mac
-  nnoremap Ï :py3f /Users/nikita/.conan/data/clang/12.0/movavi/stable/package/cc471ed355602ffa7007968c83aa4e7e648a38b5/clang-12.0/share/clang/clang-format.py<CR>
-  xnoremap Ï :py3f /Users/nikita/.conan/data/clang/12.0/movavi/stable/package/cc471ed355602ffa7007968c83aa4e7e648a38b5/clang-12.0/share/clang/clang-format.py<CR>
-  nnoremap ƒ :%py3f /Users/nikita/.conan/data/clang/12.0/movavi/stable/package/cc471ed355602ffa7007968c83aa4e7e648a38b5/clang-12.0/share/clang/clang-format.py<CR>
-  xnoremap ƒ :%py3f /Users/nikita/.conan/data/clang/12.0/movavi/stable/package/cc471ed355602ffa7007968c83aa4e7e648a38b5/clang-12.0/share/clang/clang-format.py<CR>
+  nnoremap Ï :py3f /Users/nikita/.conan/data/clang/13.0/movavi/stable/package/cc471ed355602ffa7007968c83aa4e7e648a38b5/clang-13.0/share/clang/clang-format.py<CR>
+  xnoremap Ï :py3f /Users/nikita/.conan/data/clang/13.0/movavi/stable/package/cc471ed355602ffa7007968c83aa4e7e648a38b5/clang-13.0/share/clang/clang-format.py<CR>
+  nnoremap ƒ :%py3f /Users/nikita/.conan/data/clang/13.0/movavi/stable/package/cc471ed355602ffa7007968c83aa4e7e648a38b5/clang-13.0/share/clang/clang-format.py<CR>
+  xnoremap ƒ :%py3f /Users/nikita/.conan/data/clang/13.0/movavi/stable/package/cc471ed355602ffa7007968c83aa4e7e648a38b5/clang-13.0/share/clang/clang-format.py<CR>
 elseif g:is_linux
   nnoremap <A-F> :py3f /usr/share/clang/clang-format.py<CR>
   xnoremap <A-F> :py3f /usr/share/clang/clang-format.py<CR>
