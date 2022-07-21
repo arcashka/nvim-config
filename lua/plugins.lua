@@ -97,9 +97,7 @@ require("packer").startup({
     use { 'nvim-telescope/telescope-live-grep-raw.nvim' }
     use ({ 'nvim-telescope/telescope.nvim',
       cmd = 'Telescope',
-      requires = {
-        { 'arcashka/plenary.nvim', branch = 'windows_path_absolute_fixes' }
-      },
+      requires = { 'nvim-lua/plenary.nvim' },
       config = [[require('config.nvim-telescope')]],
       event = "VimEnter",
     })
