@@ -54,12 +54,6 @@ require("packer").startup({
 
     use({"machakann/vim-swap", event = "VimEnter"})
 
-    -- IDE for Lisp
-    if utils.executable("sbcl") then
-      -- use 'kovisoft/slimv'
-      use({ "vlime/vlime", rtp = "vim/", ft = { "lisp" } })
-    end
-
     -- Super fast buffer jump
     use {
       'phaazon/hop.nvim',
@@ -101,17 +95,6 @@ require("packer").startup({
       config = [[require('config.nvim-telescope')]],
       event = "VimEnter",
     })
-    -- search emoji and other symbols
-    use {'nvim-telescope/telescope-symbols.nvim', after = 'telescope.nvim'}
-
-    -- Another similar plugin is command-t
-    -- use 'wincent/command-t'
-
-    -- Another grep tool (similar to Sublime Text Ctrl+Shift+F)
-    -- use 'dyng/ctrlsf.vim'
-
-    -- A grepping tool
-    -- use {'mhinz/vim-grepper', cmd = {'Grepper', '<plug>(GrepperOperator)'}}
 
     -- A list of colorscheme plugin you may want to try. Find what suits you.
     use({"lifepillar/vim-gruvbox8", opt = true})
@@ -127,8 +110,6 @@ require("packer").startup({
 
     -- Show git change (change, delete, add) signs in vim sign column
     use({"mhinz/vim-signify", event = 'BufEnter'})
-    -- Another similar plugin
-    -- use 'airblade/vim-gitgutter'
 
     use {'kyazdani42/nvim-web-devicons', event = 'VimEnter'}
 
@@ -171,97 +152,12 @@ require("packer").startup({
     use({"SirVer/ultisnips", event = 'InsertEnter'})
     use({ "honza/vim-snippets", after = 'ultisnips'})
 
-    -- Automatic insertion and deletion of a pair of characters
-    use({"Raimondi/delimitMate", event = "InsertEnter"})
-
-    -- Comment plugin
-    use({"tpope/vim-commentary", event = "VimEnter"})
-
-    -- Multiple cursor plugin like Sublime Text?
-    -- use 'mg979/vim-visual-multi'
-
-    -- Autosave files on certain events
-    use({
-      "Pocco81/AutoSave.nvim",
-      event = "VimEnter",
-      config = function()
-        vim.defer_fn(function() require('config.autosave') end, 1500)
-      end
-    })
-
-    -- Show undo history visually
-    use({"simnalamburt/vim-mundo", cmd = {"MundoToggle", "MundoShow"}})
-
-    -- Handy unix command inside Vim (Rename, Move etc.)
-    use({"tpope/vim-eunuch", cmd = {"Rename", "Delete"}})
-
-    -- Repeat vim motions
-    use({"tpope/vim-repeat", event = "VimEnter"})
-
-    -- Show the content of register in preview window
-    -- Plug 'junegunn/vim-peekaboo'
-    use({ "jdhao/better-escape.vim", event = { "InsertEnter" } })
-
-    -- Syntax check and make
-    -- use 'neomake/neomake'
-
     -- Auto format tools
     use({ "arcashka/neoformat", branch = "clang_format", cmd = { "Neoformat" } })
     -- use 'Chiel92/vim-autoformat'
 
     -- Git command inside vim
     use({ "tpope/vim-fugitive", event = "User InGitRepo" })
-
-    -- Better git log display
-    use({ "rbong/vim-flog", requires = "tpope/vim-fugitive", cmd = { "Flog" } })
-
-    use({ "christoomey/vim-conflicted", requires = "tpope/vim-fugitive", cmd = {"Conflicted"}})
-
-    use({ "kevinhwang91/nvim-bqf", event = "FileType qf", config = [[require('config.bqf')]] })
-
-    -- Better git commit experience
-    use({"rhysd/committia.vim", opt = true, setup = [[vim.cmd('packadd committia.vim')]]})
-
-    -- Another markdown plugin
-    use({ "plasticboy/vim-markdown", ft = { "markdown" } })
-
-    -- Faster footnote generation
-    use({ "vim-pandoc/vim-markdownfootnotes", ft = { "markdown" } })
-
-    -- Vim tabular plugin for manipulate tabular, required by markdown plugins
-    use({ "godlygeek/tabular", cmd = { "Tabularize" } })
-
-    -- Markdown JSON header highlight plugin
-    use({ "elzr/vim-json", ft = { "json", "markdown" } })
-
-    use({'folke/zen-mode.nvim', cmd = 'ZenMode', config = [[require('config.zen-mode')]]})
-
-    if vim.g.is_mac then
-      use({ "rhysd/vim-grammarous", ft = { "markdown" } })
-    end
-
-    use({"chrisbra/unicode.vim", event = "VimEnter"})
-
-    -- Additional powerful text object for vim, this plugin should be studied
-    -- carefully to use its full power
-    use({"wellle/targets.vim", event = "VimEnter"})
-
-    -- Plugin to manipulate character pairs quickly
-    -- use 'tpope/vim-surround'
-    use({"machakann/vim-sandwich", event = "VimEnter"})
-
-    -- Add indent object for vim (useful for languages like Python)
-    use({"michaeljsmith/vim-indent-object", event = "VimEnter"})
-
-    -- Since tmux is only available on Linux and Mac, we only enable these plugins
-    -- for Linux and Mac
-    if utils.executable("tmux") then
-      -- .tmux.conf syntax highlighting and setting check
-      use({ "tmux-plugins/vim-tmux", ft = { "tmux" } })
-    end
-
-    -- Modern matchit implementation
-    use({"andymass/vim-matchup", event = "VimEnter"})
 
     -- Smoothie motions
     -- use 'psliwka/vim-smoothie'
@@ -281,9 +177,6 @@ require("packer").startup({
     -- Plug 'tpope/vim-dispatch'
 
     use({ "cespare/vim-toml", ft = { "toml" }, branch = "main" })
-
-    -- Session management plugin
-    use({"tpope/vim-obsession", cmd = 'Obsession'})
 
     if vim.g.is_linux then
       use({"ojroques/vim-oscyank", cmd = {'OSCYank', 'OSCYankReg'}})
@@ -316,6 +209,10 @@ require("packer").startup({
       event = "VimEnter"
     })
 
+    use 'williamboman/mason.nvim'
+    use 'williamboman/mason-lspconfig.nvim'
+    use 'simrat39/rust-tools.nvim'
+
   end,
 
   config = {
@@ -325,6 +222,7 @@ require("packer").startup({
       default_url_format = plug_url_format,
     },
   },
+  log = { level = 'trace' },
 })
 
 local status, _ = pcall(require, 'packer_compiled')

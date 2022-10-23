@@ -3,7 +3,7 @@ local dap = require('dap')
 
 local platform_lldb_vscode = 'C:/Program Files/LLVM/bin/lldb-vscode.exe'
 if vim.g.is_mac then
-  platform_lldb_vscode = '/usr/local/Cellar/llvm/13.0.1_1/bin/lldb-vscode'
+  platform_lldb_vscode = '/usr/local/Cellar/llvm/14.0.6_1/bin/lldb-vscode'
 elseif vim.g.is_linux then
   platform_lldb_vscode = '/usr/bin/lldb-vscode'
 end
