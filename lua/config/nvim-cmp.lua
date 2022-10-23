@@ -30,8 +30,6 @@ cmp.setup({
   },
   sources = {
     { name = 'nvim_lsp' }, -- For nvim-lsp
---    { name = 'sourcekit' }, -- For sourcekit-lsp
-    { name = 'clangd' },
     { name = 'ultisnips' }, -- For ultisnips user.
     { name = 'nvim_lua' }, -- for nvim lua function
     { name = 'path' }, -- for path completion
@@ -49,8 +47,6 @@ cmp.setup({
     format = lspkind.cmp_format({
       with_text = false,
       menu = {
- --       sourcekit = "[sourcekit]",
-        clangd = "[clangd]",
         nvim_lsp = "[LSP]",
         ultisnips = "[US]",
         nvim_lua = "[Lua]",

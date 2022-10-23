@@ -41,6 +41,10 @@ require("packer").startup({
       use {"hrsh7th/cmp-emoji", after = 'nvim-cmp'}
     end
 
+    use { 'williamboman/mason.nvim', config = [[require('config.mason')]]}
+    use { 'williamboman/mason-lspconfig.nvim' }
+    use { 'simrat39/rust-tools.nvim' }
+
     -- nvim-lsp configuration (it relies on cmp-nvim-lsp, so it should be loaded after cmp-nvim-lsp).
     use({ "neovim/nvim-lspconfig", after = "cmp-nvim-lsp", config = [[require('config.lsp')]] })
 
@@ -196,7 +200,6 @@ require("packer").startup({
     -- show and trim trailing whitespaces
     use {'jdhao/whitespace.nvim', event = 'VimEnter'}
 
-    -- MINE PLUGINS
     use { 'mfussenegger/nvim-dap', config = [[require('config.nvim-dap')]] }
     use { "rcarriga/nvim-dap-ui", config = [[require('config.nvim-dap-ui')]] }
     use { 'preservim/nerdtree' }
@@ -207,10 +210,6 @@ require("packer").startup({
       event = "VimEnter"
     })
 
-    use 'williamboman/mason.nvim'
-    use 'williamboman/mason-lspconfig.nvim'
-    use 'simrat39/rust-tools.nvim'
-
   end,
 
   config = {
@@ -220,7 +219,7 @@ require("packer").startup({
       default_url_format = plug_url_format,
     },
   },
-  log = { level = 'trace' },
+  log = { level = 'warning' },
 })
 
 local status, _ = pcall(require, 'packer_compiled')
