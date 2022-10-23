@@ -202,9 +202,7 @@ require("packer").startup({
     use { 'preservim/nerdtree' }
     use ({ 'arcashka/neovim-cmake',
       branch = 'fix_select_target_with_telescope',
-      requires = {
-        { 'arcashka/plenary.nvim', branch = 'windows_path_absolute_fixes' }
-      },
+      requires = { 'nvim-lua/plenary.nvim' },
       config = [[require('config.neovim-cmake')]],
       event = "VimEnter"
     })

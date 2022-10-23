@@ -14,7 +14,7 @@ elseif vim.g.is_win then
   platform_configure_args = {
       '-G', 'Ninja',
   }
-  dap_configuration = 'cppdbg'
+  dap_configuration = 'lldb'
 end
 
 require('cmake').setup({
