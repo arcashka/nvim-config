@@ -25,7 +25,7 @@ cmp.setup({
       end
     end,
     ['<C-Space>'] = cmp.mapping.complete(),
-    ['<Esc>'] = cmp.mapping.close(),
+    ['<C-e>'] = cmp.mapping.close({ select = true }),
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
   },
   sources = {

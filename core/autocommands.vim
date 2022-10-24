@@ -1,24 +1,3 @@
-" Do not use smart case in command line mode, extracted from https://vi.stackexchange.com/a/16511/15292.
-augroup dynamic_smartcase
-  autocmd!
-  autocmd CmdLineEnter : set nosmartcase
-  autocmd CmdLineLeave : set smartcase
-augroup END
-
-augroup term_settings
-  autocmd!
-  " Do not use number and relative number for terminal inside nvim
-  autocmd TermOpen * setlocal norelativenumber nonumber
-  " Go to insert mode by default to start typing command
-  autocmd TermOpen * startinsert
-augroup END
-
-" More accurate syntax highlighting? (see `:h syn-sync`)
-augroup accurate_syn_highlight
-  autocmd!
-  autocmd BufEnter * :syntax sync fromstart
-augroup END
-
 " Return to last cursor position when opening a file
 augroup resume_cursor_position
   autocmd!
@@ -61,39 +40,6 @@ augroup auto_read
   autocmd FocusGained,CursorHold * if getcmdwintype() == '' | checktime | endif
 augroup END
 
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set rnu   | endif
-  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif
-augroup END
-
-" Define or override some highlight groups
-augroup custom_highlight
-  autocmd!
-  autocmd ColorScheme * call s:custom_highlight()
-augroup END
-
-function! s:custom_highlight() abort
-  " For yank highlight
-  highlight YankColor ctermfg=59 ctermbg=41 guifg=#34495E guibg=#2ECC71
-
-  " For cursor colors
-  highlight Cursor cterm=bold gui=bold guibg=#00c918 guifg=black
-  highlight Cursor2 guifg=red guibg=red
-
-  " For floating windows border highlight
-  highlight FloatBorder guifg=LightGreen guibg=NONE
-
-  " highlight for matching parentheses
-  highlight MatchParen cterm=bold,reverse,underline gui=bold,reverse,underline
-endfunction
-
-" highlight yanked region, see `:h lua-highlight`
-augroup highlight_yank
-  autocmd!
-  au TextYankPost * silent! lua vim.highlight.on_yank{higroup="YankColor", timeout=300, on_visual=false}
-augroup END
-
 augroup auto_close_win
   autocmd!
   autocmd BufEnter * call s:quit_current_win()
@@ -107,19 +53,3 @@ function! s:quit_current_win() abort
     quit
   endif
 endfunction
-
-augroup git_repo_check
-  autocmd!
-  autocmd VimEnter,DirChanged * call utils#Inside_git_repo()
-augroup END
-
-" Auto-generate packer_compiled.lua file
-augroup packer_auto_compile
-  autocmd!
-  autocmd BufWritePost */nvim/lua/plugins.lua source <afile> | PackerCompile
-augroup END
-
-augroup auto_create_dir
-  autocmd!
-  autocmd BufWritePre * lua require('utils').may_create_dir()
-augroup END

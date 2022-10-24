@@ -37,9 +37,6 @@ require("packer").startup({
     use {"hrsh7th/cmp-buffer", after = "nvim-cmp"}
     -- use {"hrsh7th/cmp-cmdline", after = "nvim-cmp"}
     use {"quangnguyen30192/cmp-nvim-ultisnips", after = {'nvim-cmp', 'ultisnips'}}
-    if vim.g.is_mac then
-      use {"hrsh7th/cmp-emoji", after = 'nvim-cmp'}
-    end
 
     use { 'williamboman/mason.nvim', config = [[require('config.mason')]]}
     use { 'williamboman/mason-lspconfig.nvim' }
@@ -53,11 +50,6 @@ require("packer").startup({
     -- Python indent (follows the PEP8 style)
     use({ "Vimjas/vim-python-pep8-indent", ft = { "python" } })
 
-    -- Python-related text object
-    use({ "jeetsukumaran/vim-pythonsense", ft = { "python" } })
-
-    use({"machakann/vim-swap", event = "VimEnter"})
-
     -- Super fast buffer jump
     use {
       'phaazon/hop.nvim',
@@ -66,9 +58,6 @@ require("packer").startup({
         vim.defer_fn(function() require('config.nvim_hop') end, 2000)
       end
     }
-
-    -- Clear highlight search automatically for you
-    -- use({"romainl/vim-cool", event = "VimEnter"})
 
     -- Show match number and index for searching
     use {
@@ -100,22 +89,10 @@ require("packer").startup({
       event = "VimEnter",
     })
 
-    -- A list of colorscheme plugin you may want to try. Find what suits you.
-    use({"lifepillar/vim-gruvbox8", opt = true})
-    use({"navarasu/onedark.nvim", opt = true})
-    use({"sainnhe/edge", opt = true})
-    use({"sainnhe/sonokai", opt = true})
     use({"sainnhe/gruvbox-material", opt = true})
-    use({"shaunsingh/nord.nvim", opt = true})
-    use({"NTBBloodbath/doom-one.nvim", opt = true})
-    use({"sainnhe/everforest", opt = true})
-    use({"EdenEast/nightfox.nvim", opt = true})
-    use({"rebelot/kanagawa.nvim", opt = true})
 
     -- Show git change (change, delete, add) signs in vim sign column
     use({"mhinz/vim-signify", event = 'BufEnter'})
-
-    use {'kyazdani42/nvim-web-devicons', event = 'VimEnter'}
 
     use {
       'nvim-lualine/lualine.nvim',
@@ -128,15 +105,6 @@ require("packer").startup({
     -- fancy start screen
     use { 'goolord/alpha-nvim', event = 'VimEnter', config = [[require('config.alpha-nvim')]] }
 
-    use({
-      "lukas-reineke/indent-blankline.nvim",
-      event = 'VimEnter',
-      config = [[require('config.indent-blankline')]]
-    })
-
-    -- Highlight URLs inside vim
-    use({"itchyny/vim-highlighturl", event = "VimEnter"})
-
     -- notification plugin
     use({
       "rcarriga/nvim-notify",
@@ -146,45 +114,20 @@ require("packer").startup({
       end
     })
 
-    -- Only install these plugins if ctags are installed on the system
-    if utils.executable("ctags") then
-      -- show file tags in vim window
-      use({"liuchengxu/vista.vim", cmd = "Vista"})
-    end
-
     -- Snippet engine and snippet template
     use({"SirVer/ultisnips", event = 'InsertEnter'})
     use({ "honza/vim-snippets", after = 'ultisnips'})
 
     -- Auto format tools
     use({ "arcashka/neoformat", branch = "clang_format", cmd = { "Neoformat" } })
-    -- use 'Chiel92/vim-autoformat'
 
     -- Git command inside vim
     use({ "tpope/vim-fugitive", event = "User InGitRepo" })
-
-    -- Smoothie motions
-    -- use 'psliwka/vim-smoothie'
-    use({
-      "karb94/neoscroll.nvim",
-      event = "VimEnter",
-      config = function()
-        vim.defer_fn(function() require('config.neoscroll') end, 2000)
-      end
-    })
 
     use({"tpope/vim-scriptease", cmd = {"Scriptnames", "Message", "Verbose"}})
 
     -- Asynchronous command execution
     use({ "skywind3000/asyncrun.vim", opt = true, cmd = { "AsyncRun" } })
-    -- Another asynchronous plugin
-    -- Plug 'tpope/vim-dispatch'
-
-    use({ "cespare/vim-toml", ft = { "toml" }, branch = "main" })
-
-    if vim.g.is_linux then
-      use({"ojroques/vim-oscyank", cmd = {'OSCYank', 'OSCYankReg'}})
-    end
 
     -- The missing auto-completion for cmdline!
     use({"gelguy/wilder.nvim", opt = true, setup = [[vim.cmd('packadd wilder.nvim')]]})
@@ -197,9 +140,6 @@ require("packer").startup({
     end
     }
 
-    -- show and trim trailing whitespaces
-    use {'jdhao/whitespace.nvim', event = 'VimEnter'}
-
     use { 'mfussenegger/nvim-dap', config = [[require('config.nvim-dap')]] }
     use { 'jayp0521/mason-nvim-dap.nvim', config = [[require('config.mason-nvim-dap')]] }
     use { "rcarriga/nvim-dap-ui", config = [[require('config.nvim-dap-ui')]] }
@@ -210,7 +150,6 @@ require("packer").startup({
       config = [[require('config.neovim-cmake')]],
       event = "VimEnter"
     })
-
   end,
 
   config = {

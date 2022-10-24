@@ -7,12 +7,6 @@ xnoremap ; :
 " Quicker way to open command window
 nnoremap q; q:
 
-" Turn the word under cursor to upper case
-inoremap <c-u> <Esc>viwUea
-
-" Turn the current word into title case
-inoremap <c-t> <Esc>b~lea
-
 " Paste non-linewise text above or below current cursor,
 " see https://stackoverflow.com/a/1346777/6064933
 nnoremap <leader>p m`o<ESC>p``
@@ -61,9 +55,6 @@ nnoremap <silent> \d :<C-U>call BSkipQuickFix("bprevious") <bar> bdelete #<CR>
 " see https://stackoverflow.com/a/16136133/6064933
 nnoremap <expr> <Space>o printf('m`%so<ESC>``', v:count1)
 nnoremap <expr> <Space>O printf('m`%sO<ESC>``', v:count1)
-
-" Insert a space after current character
-nnoremap <Space><Space> a<Space><ESC>h
 
 " Move the cursor based on physical lines, not the actual lines.
 nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
