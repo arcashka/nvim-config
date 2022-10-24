@@ -201,6 +201,7 @@ require("packer").startup({
     use {'jdhao/whitespace.nvim', event = 'VimEnter'}
 
     use { 'mfussenegger/nvim-dap', config = [[require('config.nvim-dap')]] }
+    use { 'jayp0521/mason-nvim-dap.nvim', config = [[require('config.mason-nvim-dap')]] }
     use { "rcarriga/nvim-dap-ui", config = [[require('config.nvim-dap-ui')]] }
     use { 'preservim/nerdtree' }
     use ({ 'arcashka/neovim-cmake',

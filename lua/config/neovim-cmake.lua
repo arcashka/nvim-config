@@ -16,7 +16,6 @@ elseif vim.g.is_win then
   }
   dap_configuration = 'lldb'
 end
-
 require('cmake').setup({
   cmake_executable = 'cmake',
   parameters_file = 'CMakeSettings.json',
@@ -24,6 +23,11 @@ require('cmake').setup({
   configure_args = { '-DCMAKE_EXPORT_COMPILE_COMMANDS=1', unpack(platform_configure_args) },
   build_args = { '-j', '10' },
   quickfix_height = 10,
-  dap_configuration = { type = dap_configuration, request = 'launch' },
+  dap_configuration = {
+    type = 'lldb',
+    request = 'launch',
+    stopOnEntry = false,
+    runInTerminal = false,
+  },
   dap_open_command = require('dap').repl.open,
 })
