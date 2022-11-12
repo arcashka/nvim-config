@@ -33,7 +33,11 @@ local custom_attach = function(client, bufnr)
 
   -- Set some key bindings conditional on server capabilities
   if client.server_capabilities.documentFormattingProvider then
-    map("n", "<space>f", vim.lsp.buf.format, { desc = "format code" })
+    if vim.g.is_mac then
+      map("n", "ƒ", vim.lsp.buf.format, { desc = "format code" })
+    else
+      map("n", "<A-f>", vim.lsp.buf.format, { desc = "format code" })
+    end
   end
 
   api.nvim_create_autocmd("CursorHold", {
@@ -95,6 +99,7 @@ local custom_attach = function(client, bufnr)
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+capabilities.offsetEncoding = { "utf-16" }
 
 local lspconfig = require("lspconfig")
 
@@ -124,7 +129,7 @@ local opts = {
     },
     -- whether the hover action window gets automatically focused
     -- default: false
-    auto_focus = false,
+    auto_focus = true,
   },
   -- all the opts to send to nvim-lspconfig
   -- these override the defaults set by rust-tools.nvim
@@ -205,6 +210,7 @@ if utils.executable("clangd") then
     flags = {
       debounce_text_changes = 500,
     },
+    cmd = { "/usr/local/Cellar/llvm/15.0.3/bin/clangd" },
   }
 else
   vim.notify("clangd not found!", vim.log.levels.WARN, { title = "Nvim-config" })

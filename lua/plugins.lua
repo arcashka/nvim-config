@@ -37,6 +37,11 @@ require("packer").startup({
     use {"hrsh7th/cmp-buffer", after = "nvim-cmp"}
     -- use {"hrsh7th/cmp-cmdline", after = "nvim-cmp"}
     use {"quangnguyen30192/cmp-nvim-ultisnips", after = {'nvim-cmp', 'ultisnips'}}
+    use {"jose-elias-alvarez/null-ls.nvim",
+        config = [[require('config.null-ls')]],
+        -- requires = { 'nvim-lua/plenary.nvim' },
+        -- rocks = {{ 'plenary.nvim', server = 'https://luarocks.org/dev'}, 'gitsigns.nvim'},
+    }
 
     use { 'williamboman/mason.nvim', config = [[require('config.mason')]]}
     use { 'williamboman/mason-lspconfig.nvim' }
@@ -90,6 +95,9 @@ require("packer").startup({
     })
 
     use({"sainnhe/gruvbox-material", opt = true})
+    use({"folke/tokyonight.nvim"})
+    use({"catppuccin/nvim"})
+    use({"EdenEast/nightfox.nvim"})
 
     -- Show git change (change, delete, add) signs in vim sign column
     use({"mhinz/vim-signify", event = 'BufEnter'})
@@ -118,16 +126,19 @@ require("packer").startup({
     use({"SirVer/ultisnips", event = 'InsertEnter'})
     use({ "honza/vim-snippets", after = 'ultisnips'})
 
-    -- Auto format tools
-    use({ "arcashka/neoformat", branch = "clang_format", cmd = { "Neoformat" } })
-
-    -- Git command inside vim
-    use({ "tpope/vim-fugitive", event = "User InGitRepo" })
+    use {
+      "folke/trouble.nvim",
+      requires = "kyazdani42/nvim-web-devicons",
+      config = function()
+        require("trouble").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+      end
+    }
 
     use({"tpope/vim-scriptease", cmd = {"Scriptnames", "Message", "Verbose"}})
-
-    -- Asynchronous command execution
-    use({ "skywind3000/asyncrun.vim", opt = true, cmd = { "AsyncRun" } })
 
     -- The missing auto-completion for cmdline!
     use({"gelguy/wilder.nvim", opt = true, setup = [[vim.cmd('packadd wilder.nvim')]]})

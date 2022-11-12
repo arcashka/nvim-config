@@ -165,10 +165,6 @@ nnoremap <Right> <C-W>l
 nnoremap <Up> <C-W>k
 nnoremap <Down> <C-W>j
 
-" Text objects for URL
-xnoremap <silent> iu :<C-U>call text_obj#URL()<CR>
-onoremap <silent> iu :<C-U>call text_obj#URL()<CR>
-
 " Text objects for entire buffer
 xnoremap <silent> iB :<C-U>call text_obj#Buffer()<CR>
 onoremap <silent> iB :<C-U>call text_obj#Buffer()<CR>
@@ -180,31 +176,6 @@ nnoremap J mzJ`z
 for ch in [',', '.', '!', '?', ';', ':']
   execute printf('inoremap %s %s<C-g>u', ch, ch)
 endfor
-
-" insert semicolon in the end
-if g:is_mac
-  inoremap … <ESC>miA;<ESC>`ii
-else
-  inoremap <A-;> <ESC>miA;<ESC>`ii
-endif
-
-if g:is_mac
-  nnoremap Ï :py3f /usr/local/Cellar/clang-format/14.0.6/share/clang/clang-format.py<CR>
-  xnoremap Ï :py3f /usr/local/Cellar/clang-format/14.0.6/share/clang/clang-format.py<CR>
-  nnoremap ƒ :%py3f /usr/local/Cellar/clang-format/14.0.6/share/clang/clang-format.py<CR>
-  xnoremap ƒ :%py3f /usr/local/Cellar/clang-format/14.0.6/share/clang/clang-format.py<CR>
-elseif g:is_linux
-  nnoremap <A-F> :py3f /usr/share/clang/clang-format.py<CR>
-  xnoremap <A-F> :py3f /usr/share/clang/clang-format.py<CR>
-  nnoremap <A-f> :%py3f /usr/share/clang/clang-format.py<CR>
-  xnoremap <A-f> :%py3f /usr/share/clang/clang-format.py<CR>
-elseif g:is_win
-  let g:clang_format_path = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\Llvm\\x64\\bin\\clang-format.exe"
-  nnoremap <A-F> :py3f C:\\Users\\arcashka\\.conan\\data\\clang\\12.0.0\\movavi\\stable\\package\\3475bd55b91ae904ac96fde0f106a136ab951a5e\\share\\clang\\clang-format.py<CR>
-  xnoremap <A-F> :py3f C:\\Users\\arcashka\\.conan\\data\\clang\\12.0.0\\movavi\\stable\\package\\3475bd55b91ae904ac96fde0f106a136ab951a5e\\share\\clang\\clang-format.py<CR>
-  nnoremap <A-f> :%py3f C:\\Users\\arcashka\\.conan\\data\\clang\\12.0.0\\movavi\\stable\\package\\3475bd55b91ae904ac96fde0f106a136ab951a5e\\share\\clang\\clang-format.py<CR>
-  xnoremap <A-f> :%py3f C:\\Users\\arcashka\\.conan\\data\\clang\\12.0.0\\movavi\\stable\\package\\3475bd55b91ae904ac96fde0f106a136ab951a5e\\share\\clang\\clang-format.py<CR>
-endif
 
 " Keep cursor position after yanking
 nnoremap y myy
