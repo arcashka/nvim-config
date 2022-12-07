@@ -77,6 +77,8 @@ nnoremap <C-b>r :CMake run<CR>
 """"""""""""""""""""""""""""""NERDTree settings""""""""""""""""""""""""""""""
 nnoremap <C-n> :NERDTreeToggle<CR>
 nnoremap <leader>r :NERDTreeFind<CR>
+""""""""""""""""""""""""""""""Trouble settings""""""""""""""""""""""""""""""
+nnoremap <leader>t :TroubleToggle<CR>
 
 """""""""""""""""""""""""""""""""dap settings""""""""""""""""""""""""""""""
 nnoremap <silent> <F5> :lua require'dap'.continue()<CR>

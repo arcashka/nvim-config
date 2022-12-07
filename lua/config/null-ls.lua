@@ -5,10 +5,11 @@ null_ls.setup({
         -- null_ls.builtins.completion.spell, -- completion
         -- null_ls.builtins.code_actions.gitsigns, -- code_action
         null_ls.builtins.diagnostics.cmake_lint, -- cmake-lint
-        null_ls.builtins.diagnostics.cppcheck,
-        null_ls.builtins.formatting.clang_format,
+        null_ls.builtins.diagnostics.cppcheck.with({
+            extra_args = { "--std=C++20" },
+        }),
         null_ls.builtins.formatting.cmake_format,
-        null_ls.builtins.formatting.stylua,
+        -- null_ls.builtins.formatting.stylua,
         null_ls.builtins.formatting.rustfmt.with({
             extra_args = function(params)
                 local Path = require("plenary.path")
