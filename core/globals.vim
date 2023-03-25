@@ -10,8 +10,8 @@ let g:loaded_node_provider = 0
 
 let g:did_install_default_menus = 1  " do not load menu
 
-if executable('python')
-  let g:python3_host_prog=exepath('python')
+if executable('python3')
+  let g:python3_host_prog=exepath('python3')
 else
   echoerr 'Python 3 executable not found! You must install Python 3 and set its PATH correctly!'
 endif
