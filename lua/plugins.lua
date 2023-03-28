@@ -47,6 +47,8 @@ require("packer").startup({
         use({ "williamboman/mason-lspconfig.nvim" })
         use({ "simrat39/rust-tools.nvim" })
 
+        use({"DoDoENT/neovim-additional-tasks"})
+        use({"Shatur/neovim-tasks", config = [[require('config.neovim-tasks')]]})
         -- nvim-lsp configuration (it relies on cmp-nvim-lsp, so it should be loaded after cmp-nvim-lsp).
         use({ "neovim/nvim-lspconfig", after = "cmp-nvim-lsp", config = [[require('config.lsp')]] })
 
@@ -176,8 +178,6 @@ require("packer").startup({
         use({ "jayp0521/mason-nvim-dap.nvim", config = [[require('config.mason-nvim-dap')]] })
         use({ "rcarriga/nvim-dap-ui", config = [[require('config.nvim-dap-ui')]] })
         use({ "preservim/nerdtree" })
-        use({ "DoDoENT/neovim-additional-tasks"})
-        use({ "Shatur/neovim-tasks", config = [[require('config.neovim-tasks')]]})
     end,
 
     config = {

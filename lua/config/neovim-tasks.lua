@@ -9,7 +9,20 @@ require('tasks').setup({
       build_dir = tostring(Path:new('{cwd}', 'build')), -- Build directory. The expressions `{cwd}`, `{os}` and `{build_type}` will be expanded with the corresponding text values. Could be a function that return the path to the build directory.
       cmake_kits_file = vim.api.nvim_get_runtime_file( 'nvim_cmake_kits.json', false )[ 1 ], -- set path to JSON file containing cmake kits
       cmake_build_types_file = vim.api.nvim_get_runtime_file( 'nvim_cmake_build_types.json', false )[ 1 ], -- set path to JSON file containing cmake kits
-      clangd_cmdline = { '/home/dev/.local/share/nvim/mason/bin/clangd', '--background-index', '--clang-tidy', '--header-insertion=never', '--offset-encoding=utf-8', '--pch-storage=memory', '--cross-file-rename', '-j=4' }, -- command line for invoking clangd - this array will be extended with --compile-commands-dir and --query-driver after each cmake configure with parameters inferred from build_kit, build_type and build_dir
+      clangd_cmdline = {-- { '/home/dev/.local/share/nvim/mason/bin/clangd', '--background-index', '--clang-tidy', '--offset-encoding=utf-8', '--pch-storage=memory', '--cross-file-rename', '-j=4' }, -- command line for invoking clangd - this array will be extended with --compile-commands-dir and --query-driver after each cmake configure with parameters inferred from build_kit, build_type and build_dir
+        "/home/dev/.local/share/nvim/mason/bin/clangd",
+        "--background-index",
+        "-j=8",
+        "--query-driver=/usr/bin/**/clang-*,/bin/clang,/bin/clang++,/usr/bin/gcc,/usr/bin/g++",
+        "--clang-tidy",
+        "--clang-tidy-checks=*",
+        "--all-scopes-completion",
+        "--cross-file-rename",
+        "--completion-style=detailed",
+        "--header-insertion-decorators",
+        "--header-insertion=iwyu",
+        "--pch-storage=memory"
+      }
     }
   },
   params_file = 'neovim.json',
