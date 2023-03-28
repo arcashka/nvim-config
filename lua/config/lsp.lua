@@ -203,19 +203,15 @@ end
 --   vim.notify("pyright not found!", vim.log.levels.WARN, {title = 'Nvim-config'})
 -- end
 
-if utils.executable("clangd") then
-    lspconfig.clangd.setup {
-        on_attach = custom_attach,
-        capabilities = capabilities,
-        filetypes = { "c", "cpp", "cc", "mm", "objcpp" },
-        flags = {
-            debounce_text_changes = 500,
-        },
-        cmd = { "/usr/local/Cellar/llvm/15.0.3/bin/clangd" },
-    }
-else
-    vim.notify("clangd not found!", vim.log.levels.WARN, { title = "Nvim-config" })
-end
+lspconfig.clangd.setup({
+    on_attach = custom_attach,
+    capabilities = capabilities,
+    filetypes = { "c", "cpp", "cc", "mm", "objcpp" },
+    flags = {
+        debounce_text_changes = 500,
+    },
+    cmd = require('tasks.cmake_kits_utils').currentClangdArgs(),
+})
 
 -- set up vim-language-server
 if utils.executable("vim-language-server") then

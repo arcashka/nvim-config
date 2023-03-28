@@ -1,0 +1,9 @@
+{
+    "gcc": {
+        "compilers": {
+            "C": "gcc",
+            "CXX": "g++"
+        },
+        "generator": "Ninja"
+    }
+}

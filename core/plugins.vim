@@ -69,11 +69,11 @@ nnoremap <space>b :BufferLinePick<CR>
 nnoremap <space>B :BufferLinePickClose<CR>
 
 """"""""""""""""""""""""""""""CMake settings""""""""""""""""""""""""""""""
-nnoremap <C-b>b :CMake build<CR>
-nnoremap <C-b>B :CMake build_all<CR>
-nnoremap <C-b>c :CMake configure<CR>
-nnoremap <C-b>t :CMake select_target<CR>
-nnoremap <C-b>r :CMake run<CR>
+nnoremap <C-b>b :Task start cmake_kits build -j 10<CR>
+nnoremap <C-b>B :Task start cmake_kits build_all -j 10<CR>
+nnoremap <C-b>c :Task start cmake_kits configure<CR>
+nnoremap <C-b>t :Task set_module_param cmake_kits target<CR>
+nnoremap <C-b>r :Task start cmake_kits run<CR>
 """"""""""""""""""""""""""""""NERDTree settings""""""""""""""""""""""""""""""
 nnoremap <C-n> :NERDTreeToggle<CR>
 nnoremap <leader>r :NERDTreeFind<CR>

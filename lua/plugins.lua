@@ -176,13 +176,8 @@ require("packer").startup({
         use({ "jayp0521/mason-nvim-dap.nvim", config = [[require('config.mason-nvim-dap')]] })
         use({ "rcarriga/nvim-dap-ui", config = [[require('config.nvim-dap-ui')]] })
         use({ "preservim/nerdtree" })
-        use({
-            "arcashka/neovim-cmake",
-            branch = "fix_select_target_with_telescope",
-            requires = { "nvim-lua/plenary.nvim" },
-            config = [[require('config.neovim-cmake')]],
-            event = "VimEnter",
-        })
+        use({ "DoDoENT/neovim-additional-tasks"})
+        use({ "Shatur/neovim-tasks", config = [[require('config.neovim-tasks')]]})
     end,
 
     config = {
