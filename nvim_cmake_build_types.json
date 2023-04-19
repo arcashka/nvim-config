@@ -2,5 +2,9 @@
     "debug" : {
         "build_type" : "Debug",
         "cmake_usr_args" : {}
+    },
+    "release" : {
+        "build_type" : "Release",
+        "cmake_usr_args" : {}
     }
 }

@@ -206,7 +206,7 @@ end
 lspconfig.clangd.setup({
     on_attach = custom_attach,
     capabilities = capabilities,
-    filetypes = { "c", "cpp", "cc", "mm", "objcpp" },
+    filetypes = { "c", "cpp", "cc", "mm", "objcpp", "h", "hpp" },
     flags = {
         debounce_text_changes = 500,
     },

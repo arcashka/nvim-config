@@ -36,9 +36,12 @@ require("packer").startup({
         use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" })
         -- use {"hrsh7th/cmp-cmdline", after = "nvim-cmp"}
         use({ "quangnguyen30192/cmp-nvim-ultisnips", after = { "nvim-cmp", "ultisnips" } })
+
+        use { 'lewis6991/gitsigns.nvim', config = [[require('config.gitsigns')]] }
         use({
             "jose-elias-alvarez/null-ls.nvim",
             config = [[require('config.null-ls')]],
+            after = "gitsigns.nvim",
             -- requires = { 'nvim-lua/plenary.nvim' },
             -- rocks = {{ 'plenary.nvim', server = 'https://luarocks.org/dev'}, 'gitsigns.nvim'},
         })
@@ -112,9 +115,6 @@ require("packer").startup({
         use({ "catppuccin/nvim" })
         use({ "EdenEast/nightfox.nvim" })
 
-        -- Show git change (change, delete, add) signs in vim sign column
-        use({ "mhinz/vim-signify", event = "BufEnter" })
-
         use({
             "nvim-lualine/lualine.nvim",
             event = "VimEnter",
@@ -178,6 +178,7 @@ require("packer").startup({
         use({ "jayp0521/mason-nvim-dap.nvim", config = [[require('config.mason-nvim-dap')]] })
         use({ "rcarriga/nvim-dap-ui", config = [[require('config.nvim-dap-ui')]] })
         use({ "preservim/nerdtree" })
+        use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
     end,
 
     config = {

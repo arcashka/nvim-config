@@ -13,15 +13,12 @@ require('tasks').setup({
         "/home/dev/.local/share/nvim/mason/bin/clangd",
         "--background-index",
         "-j=8",
-        "--query-driver=/usr/bin/**/clang-*,/bin/clang,/bin/clang++,/usr/bin/gcc,/usr/bin/g++",
         "--clang-tidy",
-        "--clang-tidy-checks=*",
-        "--all-scopes-completion",
-        "--cross-file-rename",
         "--completion-style=detailed",
-        "--header-insertion-decorators",
-        "--header-insertion=iwyu",
-        "--pch-storage=memory"
+        "--all-scopes-completion",
+        "--header-insertion=never",
+        "--pch-storage=memory",
+        "--log=verbose"
       }
     }
   },

@@ -9,6 +9,7 @@ null_ls.setup({
             extra_args = { "--std=C++20" },
         }),
         null_ls.builtins.formatting.cmake_format,
+        null_ls.builtins.code_actions.gitsigns,
         -- null_ls.builtins.formatting.stylua,
         null_ls.builtins.formatting.rustfmt.with({
             extra_args = function(params)
