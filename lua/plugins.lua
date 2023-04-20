@@ -110,7 +110,7 @@ require("packer").startup({
             event = "VimEnter",
         })
 
-        use({ "sainnhe/gruvbox-material", opt = true })
+        use({ "sainnhe/everforest" })
         use({ "folke/tokyonight.nvim" })
         use({ "catppuccin/nvim" })
         use({ "EdenEast/nightfox.nvim" })
@@ -178,7 +178,7 @@ require("packer").startup({
         use({ "jayp0521/mason-nvim-dap.nvim", config = [[require('config.mason-nvim-dap')]] })
         use({ "rcarriga/nvim-dap-ui", config = [[require('config.nvim-dap-ui')]] })
         use({ "preservim/nerdtree" })
-        use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
+        use({ "iamcco/markdown-preview.nvim" })
     end,
 
     config = {

@@ -16,7 +16,7 @@ let g:config_files = [
       \ 'plugins.vim',
       \ ]
 
-colorscheme nordfox
+colorscheme everforest
 
 for s:fname in g:config_files
   execute printf('source %s/core/%s', stdpath('config'), s:fname)
