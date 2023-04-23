@@ -1,21 +1,4 @@
 scriptencoding utf-8
-
-" change fillchars for folding, vertical split, end of buffer, and message separator
-set fillchars=fold:\ ,vert:\│,eob:\ ,msgsep:‾
-
-" Paste mode toggle, it seems that Nvim's bracketed paste mode
-" does not work very well for nvim-qt, so we use good-old paste mode
-set pastetoggle=<F12>
-
-" Split window below/right when creating horizontal/vertical windows
-set splitbelow splitright
-
-" Time in milliseconds to wait for a mapped sequence to complete,
-" see https://unix.stackexchange.com/q/36882/221410 for more info
-set timeoutlen=500
-
-set updatetime=500  " For CursorHold events
-
 " Clipboard settings, always use clipboard for all delete, yank, change, put
 " operation, see https://stackoverflow.com/q/30691466/6064933
 if !empty(provider#clipboard#Executable())
@@ -25,49 +8,16 @@ endif
 " Disable creating swapfiles, see https://stackoverflow.com/q/821902/6064933
 set noswapfile
 
-" Ignore certain files and folders when globing
-" set wildignore+=*.o,*.obj,*.dylib,*.bin,*.dll,*.exe
-" set wildignore+=*/.git/*,*/.svn/*,*/__pycache__/*,*/build/**
-" set wildignore+=*.jpg,*.png,*.jpeg,*.bmp,*.gif,*.tiff,*.svg,*.ico
-" set wildignore+=*.pyc,*.pkl
-" set wildignore+=*.DS_Store
-" set wildignore+=*.aux,*.bbl,*.blg,*.brf,*.fls,*.fdb_latexmk,*.synctex.gz,*.xdv
-" set wildignorecase  " ignore file and dir name cases in cmd-completion
-
-" Set up backup directory
-let g:backupdir=expand(stdpath('data') . '/backup//')
-let &backupdir=g:backupdir
-
-" Skip backup for patterns in option wildignore
-let &backupskip=&wildignore
-set backup  " create backup for files
-set backupcopy=yes  " copy the original file to backupdir and overwrite it
-
 " General tab settings
 set tabstop=4       " number of visual spaces per TAB
 set softtabstop=4   " number of spaces in tab when editing
 set shiftwidth=4    " number of spaces to use for autoindent
 set expandtab       " expand tab to spaces so that tabs are spaces
 
-" Set matching pairs of characters and highlight matching brackets
-set matchpairs+=<:>,「:」,『:』,【:】,“:”,‘:’,《:》
-
 set number relativenumber  " Show line number and relative line number
 
 " Ignore case in general, but become case-sensitive when uppercase is present
 set ignorecase smartcase
-
-" File and script encoding settings for vim
-set fileencoding=utf-8
-set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
-
-" Break line at predefined characters
-set linebreak
-" Character to show before the lines that have been soft-wrapped
-set showbreak=↪
-
-" List all matches and complete till longest common string
-set wildmode=list:longest
 
 " Minimum lines to keep above and below cursor when scrolling
 set scrolloff=3
@@ -92,14 +42,6 @@ set list listchars=tab:▸\ ,extends:❯,precedes:❮,nbsp:␣
 
 " Auto-write the file based on some condition
 set autowrite
-
-" Show hostname, full path of file and last-mod time on the window title. The
-" meaning of the format str for strftime can be found in
-" http://man7.org/linux/man-pages/man3/strftime.3.html. The function to get
-" lastmod time is drawn from https://stackoverflow.com/q/8426736/6064933
-set title
-set titlestring=
-set titlestring=%{utils#Get_titlestr()}
 
 " Persistent undo even after you close a file and re-open it
 set undofile

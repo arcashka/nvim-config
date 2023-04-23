@@ -5,5 +5,12 @@
             "CXX": "g++"
         },
         "generator": "Ninja"
+    },
+    "clang": {
+        "compilers": {
+            "C": "clang",
+            "CXX": "clang++"
+        },
+        "generator": "Ninja"
     }
 }

@@ -179,11 +179,12 @@ require("packer").startup({
         use({ "rcarriga/nvim-dap-ui", config = [[require('config.nvim-dap-ui')]] })
         use({ "preservim/nerdtree" })
         use({ "iamcco/markdown-preview.nvim" })
+        use({ "ethanholz/nvim-lastplace", config = [[require('config.lastplace')]] })
     end,
 
     config = {
         max_jobs = 16,
-        compile_path = util.join_paths(vim.fn.stdpath("config"), "lua", "packer_compiled.lua"),
+        compile_path = util.join_paths(vim.fn.stdpath("data"), "packer", "packer_compiled.lua"),
         git = {
             default_url_format = plug_url_format,
         },

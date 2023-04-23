@@ -74,7 +74,7 @@ local custom_attach = function(client, bufnr)
       hi! link LspReferenceRead Visual
       hi! link LspReferenceText Visual
       hi! link LspReferenceWrite Visual
-    ]]   )
+    ]])
 
         local gid = api.nvim_create_augroup("lsp_document_highlight", { clear = true })
         api.nvim_create_autocmd("CursorHold", {
@@ -236,7 +236,7 @@ end
 
 if utils.executable("lua-language-server") then
     -- settings for lua-language-server can be found on https://github.com/sumneko/lua-language-server/wiki/Settings .
-    lspconfig.sumneko_lua.setup {
+    lspconfig.lua_ls.setup {
         on_attach = custom_attach,
         settings = {
             Lua = {

@@ -4,11 +4,6 @@
 nnoremap ; :
 xnoremap ; :
 
-" Quicker way to open command window
-nnoremap q; q:
-
-" Paste non-linewise text above or below current cursor,
-" see https://stackoverflow.com/a/1346777/6064933
 nnoremap <leader>p m`o<ESC>p``
 nnoremap <leader>P m`O<ESC>p``
 
@@ -19,27 +14,6 @@ nnoremap <silent> <leader>q :<C-U>x<CR>
 " Quit all opened buffers
 nnoremap <silent> <leader>Q :<C-U>qa!<CR>
 
-" Navigation in the location and quickfix list
-nnoremap <silent> [l :<C-U>lprevious<CR>zv
-nnoremap <silent> ]l :<C-U>lnext<CR>zv
-nnoremap <silent> [L :<C-U>lfirst<CR>zv
-nnoremap <silent> ]L :<C-U>llast<CR>zv
-nnoremap <silent> [q :<C-U>cprevious<CR>zv
-nnoremap <silent> ]q :<C-U>cnext<CR>zv
-nnoremap <silent> [Q :<C-U>cfirst<CR>zv
-nnoremap <silent> ]Q :<C-U>clast<CR>zv
-
-function! BSkipQuickFix(command)
-  let start_buffer = bufnr('%')
-  execute a:command
-  while &buftype ==# 'quickfix' && bufnr('%') != start_buffer
-    execute a:command
-  endwhile
-endfunction
-
-nnoremap<silent> <Tab> :call BSkipQuickFix("bn")<CR>
-nnoremap<silent> <S-Tab> :call BSkipQuickFix("bp")<CR>
-
 " Close all buffers except current one
 nnoremap \D : %bd<CR><C-O>:bd#<CR>
 
@@ -49,7 +23,10 @@ nnoremap<silent> \x :<C-U>windo lclose <bar> cclose<CR>
 
 " Close a buffer and switching to another buffer, do not close the
 " window, see https://stackoverflow.com/q/4465095/6064933
-nnoremap <silent> \d :<C-U>call BSkipQuickFix("bprevious") <bar> bdelete #<CR>
+nnoremap <silent> \d :<C-U>call bprevious <bar> bdelete #<CR>
+
+nnoremap <silent> <Tab> :bnext <CR>
+nnoremap <silent> <S-Tab> :bprevious <CR>
 
 " Insert a blank line below or above current line (do not move the cursor),
 " see https://stackoverflow.com/a/16136133/6064933
@@ -75,44 +52,12 @@ xnoremap L g_
 xnoremap < <gv
 xnoremap > >gv
 
-" When completion menu is shown, use <cr> to select an item and do not add an
-" annoying newline. Otherwise, <enter> is what it is. For more info , see
-" https://superuser.com/a/941082/736190 and
-" https://unix.stackexchange.com/q/162528/221410
-" inoremap <expr> <cr> ((pumvisible())?("\<C-Y>"):("\<cr>"))
-" Use <esc> to close auto-completion menu
-" inoremap <expr> <esc> ((pumvisible())?("\<C-e>"):("\<esc>"))
-
-" Tab-complete, see https://vi.stackexchange.com/q/19675/15292.
-inoremap <expr> <tab> pumvisible() ? "\<c-n>" : "\<tab>"
-inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
-
-" Edit and reload init.vim quickly
-nnoremap <silent> <leader>ev :<C-U>tabnew $MYVIMRC <bar> tcd %:h<cr>
-nnoremap <silent> <leader>sv :<C-U>silent update $MYVIMRC <bar> source $MYVIMRC <bar>
-      \ call v:lua.vim.notify("Nvim config successfully reloaded!", 'info', {'title': 'nvim-config'})<cr>
-
-" Reselect the text that has just been pasted, see also https://stackoverflow.com/a/4317090/6064933.
-nnoremap <expr> <leader>v printf('`[%s`]', getregtype()[0])
-
 " Search in selected region
 xnoremap / :<C-U>call feedkeys('/\%>'.(line("'<")-1).'l\%<'.(line("'>")+1)."l")<CR>
 
 " Find and replace (like Sublime Text 3)
-nnoremap <C-H> :%s/
-xnoremap <C-H> :s/
-
-" Change current working directory locally and print cwd after that,
-" see https://vim.fandom.com/wiki/Set_working_directory_to_the_current_file
-nnoremap <silent> <leader>cd :<C-U>lcd %:p:h<CR>:pwd<CR>
-
-" Use Esc to quit builtin terminal
-tnoremap <ESC>   <C-\><C-n>
-
-" Toggle spell checking (autosave does not play well with z=, so we disable it
-" when we are doing spell checking)
-nnoremap <silent> <F11> :<C-U>set spell!<cr>
-inoremap <silent> <F11> <C-O>:<C-U>set spell!<cr>
+nnoremap <C-S> :%s/
+xnoremap <C-S> :s/
 
 " Change text without putting it into the vim register,
 " see https://stackoverflow.com/q/54255/6064933
@@ -121,30 +66,63 @@ nnoremap C "_C
 nnoremap cc "_cc
 xnoremap c "_c
 
-" Remove trailing whitespace characters
-nnoremap <silent> <leader><Space> :<C-U>StripTrailingWhitespace<CR>
-
-" check the syntax group of current cursor position
-nnoremap <silent> <leader>st :<C-U>call utils#SynGroup()<CR>
-
 " Clear highlighting
 if maparg('<C-L>', 'n') ==# ''
   nnoremap <silent> <C-L> :<C-U>nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 endif
 
-" Copy entire buffer.
-nnoremap <silent> <leader>y :<C-U>%y<CR>
+function! SwitchLine(src_line_idx, direction) abort
+  if a:direction ==# 'up'
+    if a:src_line_idx == 1
+        return
+    endif
+    move-2
+  elseif a:direction ==# 'down'
+    if a:src_line_idx == line('$')
+        return
+    endif
+    move+1
+  endif
+endfunction
 
-" Toggle cursor column
-nnoremap <silent> <leader>cl :<C-U>call utils#ToggleCursorCol()<CR>
+function! MoveSelection(direction) abort
+  " only do this if previous mode is visual line mode. Once we press some keys in
+  " visual line mode, we will leave this mode. So the output of `mode()` will be
+  " `n` instead of `V`. We can use `visualmode()` instead to check the previous
+  " mode, see also https://stackoverflow.com/a/61486601/6064933
+  if visualmode() !=# 'V'
+    return
+  endif
+
+  let l:start_line = line("'<")
+  let l:end_line = line("'>")
+  let l:num_line = l:end_line - l:start_line + 1
+
+  if a:direction ==# 'up'
+    if l:start_line == 1
+      " we can also directly use `normal gv`, see https://stackoverflow.com/q/9724123/6064933
+      normal! gv
+      return
+    endif
+    silent execute printf('%s,%smove-2', l:start_line, l:end_line)
+    normal! gv
+  elseif a:direction ==# 'down'
+    if l:end_line == line('$')
+      normal! gv
+      return
+    endif
+    silent execute printf('%s,%smove+%s', l:start_line, l:end_line, l:num_line)
+    normal! gv
+  endif
+endfunction
 
 " Move current line up and down
 if g:is_mac
-  nnoremap <silent> ˚ <Cmd>call utils#SwitchLine(line('.'), 'up')<CR>
-  nnoremap <silent> ∆ <Cmd>call utils#SwitchLine(line('.'), 'down')<CR>
+  nnoremap <silent> ˚ <Cmd>call SwitchLine(line('.'), 'up')<CR>
+  nnoremap <silent> ∆ <Cmd>call SwitchLine(line('.'), 'down')<CR>
 else
-  nnoremap <silent> <A-k> <Cmd>call utils#SwitchLine(line('.'), 'up')<CR>
-  nnoremap <silent> <A-j> <Cmd>call utils#SwitchLine(line('.'), 'down')<CR>
+  nnoremap <silent> <A-k> <Cmd>call SwitchLine(line('.'), 'up')<CR>
+  nnoremap <silent> <A-j> <Cmd>call SwitchLine(line('.'), 'down')<CR>
 endif
 
 " Move current visual-line selection up and down
@@ -160,33 +138,6 @@ endif
 " register, see also https://stackoverflow.com/q/10723700/6064933.
 xnoremap p "_c<ESC>p
 
-nnoremap <Left> <C-W>h
-nnoremap <Right> <C-W>l
-nnoremap <Up> <C-W>k
-nnoremap <Down> <C-W>j
-
-" Text objects for entire buffer
-xnoremap <silent> iB :<C-U>call text_obj#Buffer()<CR>
-onoremap <silent> iB :<C-U>call text_obj#Buffer()<CR>
-
-" Do not move my cursor when joining lines.
-nnoremap J mzJ`z
-
-" Break inserted text into smaller undo units.
-for ch in [',', '.', '!', '?', ';', ':']
-  execute printf('inoremap %s %s<C-g>u', ch, ch)
-endfor
-
 " Keep cursor position after yanking
 nnoremap y myy
 xnoremap y myy
-
-augroup restore_after_yank
-  autocmd!
-  autocmd TextYankPost *  call s:restore_cursor()
-augroup END
-
-function! s:restore_cursor() abort
-  silent! normal `y
-  silent! delmarks y
-endfunction
