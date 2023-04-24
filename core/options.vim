@@ -23,8 +23,8 @@ set ignorecase smartcase
 set scrolloff=3
 
 " Use mouse to select and resize windows, etc.
-set mouse=nic  " Enable mouse in several mode
-set mousemodel=popup  " Set the behaviour of mouse
+set mouse=nicv  " Enable mouse in several mode
+set mousemodel=extend  " Set the behaviour of mouse
 
 " Disable showing current mode on command line since statusline plugins can show it.
 set noshowmode
@@ -67,9 +67,6 @@ set winblend=5  " pseudo transparency for floating window
 " Insert mode key word completion setting
 set complete+=kspell complete-=w complete-=b complete-=u complete-=t
 
-set spelllang=en,cjk  " Spell languages
-set spellsuggest+=9  " show 9 spell suggestions at most
-
 " Align indent to next multiple value of shiftwidth. For its meaning,
 " see http://vim.1045645.n5.nabble.com/shiftround-option-td5712100.html
 set shiftround
@@ -97,22 +94,10 @@ endif
 " colors, see https://github.com/termstandard/colors and https://gist.github.com/XVilka/8346728.
 set termguicolors
 
-" Set up cursor color and shape in various mode, ref:
-" https://github.com/neovim/neovim/wiki/FAQ#how-to-change-cursor-color-in-the-terminal
-set guicursor=n-v-c:block-Cursor/lCursor,i-ci-ve:ver25-Cursor2/lCursor2,r-cr:hor20,o:hor20
-
 set signcolumn=auto:2
 
 " Remove certain character from file name pattern matching
 set isfname-==
 set isfname-=,
-
-" diff options
-set diffopt=
-set diffopt+=vertical  " show diff in vertical position
-set diffopt+=filler  " show filler for deleted lines
-set diffopt+=closeoff  " turn off diff when one file window is closed
-set diffopt+=context:3  " context for diff
-set diffopt+=internal,indent-heuristic,algorithm:histogram
 
 set nowrap  " do no wrap

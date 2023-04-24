@@ -11,62 +11,11 @@ nnoremap <leader>fl <cmd>Telescope current_buffer_fuzzy_find<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
-""""""""""""""""""""""""""""vim-xkbswitch settings"""""""""""""""""""""""""
-let g:XkbSwitchEnabled = 1
-
-""""""""""""""""""""""""""""vim-startify settings""""""""""""""""""""""""""""
-" Do not change working directory when opening files.
-let g:startify_change_to_dir = 0
-let g:startify_fortune_use_unicode = 1
-
-""""""""""""""""""""""""""""""wilder.nvim settings""""""""""""""""""""""""""""""
-augroup wilder_init
-  autocmd!
-  " CursorHold is suggested here: https://github.com/gelguy/wilder.nvim/issues/89#issuecomment-934465957.
-  autocmd CursorHold * ++once call s:wilder_init()
-augroup END
-
-function! s:wilder_init() abort
-  try
-    call wilder#setup({
-          \ 'modes': [':', '/', '?'],
-          \ })
-
-    call wilder#set_option('pipeline', [
-          \   wilder#branch(
-          \     wilder#cmdline_pipeline({
-          \       'language': 'python',
-          \       'fuzzy': 1,
-          \       'sorter': wilder#python_difflib_sorter(),
-          \       'debounce': 30,
-          \     }),
-          \     wilder#python_search_pipeline({
-          \       'pattern': wilder#python_fuzzy_pattern(),
-          \       'sorter': wilder#python_difflib_sorter(),
-          \       'engine': 're',
-          \       'debounce': 30,
-          \     }),
-          \   ),
-          \ ])
-
-    let l:hl = wilder#make_hl('WilderAccent', 'Pmenu', [{}, {}, {'foreground': '#f4468f'}])
-    call wilder#set_option('renderer', wilder#popupmenu_renderer({
-          \ 'highlighter': wilder#basic_highlighter(),
-          \ 'max_height': 15,
-          \ 'highlights': {
-          \   'accent': l:hl,
-          \ },
-          \ 'left': [' ', wilder#popupmenu_devicons(),],
-          \ 'right': [' ', wilder#popupmenu_scrollbar(),],
-          \ 'apply_incsearch_fix': 0,
-          \ }))
-  catch /^Vim\%((\a\+)\)\=:E117/
-    echohl Error |echomsg "Wilder.nvim missing: run :PackerSync to fix."|echohl None
-  endtry
-endfunction
 """"""""""""""""""""""""""""""bufferline settings"""""""""""""""""""""""""
 nnoremap <space>b :BufferLinePick<CR>
 nnoremap <space>B :BufferLinePickClose<CR>
+nnoremap <silent> <Tab> :BufferLineCycleNext <CR>
+nnoremap <silent> <S-Tab> :BufferLineCyclePrev <CR>
 
 """"""""""""""""""""""""""""""CMake settings""""""""""""""""""""""""""""""
 nnoremap <C-b>b :Task start cmake_kits build -j 10<CR>

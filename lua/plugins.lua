@@ -83,7 +83,7 @@ require("packer").startup({
             "kevinhwang91/nvim-hlslens",
             branch = "main",
             keys = { { "n", "*" }, { "n", "#" }, { "n", "n" }, { "n", "N" } },
-            config = [[require('config._hlslens')]],
+            config = [[require('config.hlslens')]],
         })
 
         -- Stay after pressing * and search selected text
@@ -161,7 +161,7 @@ require("packer").startup({
         use({ "tpope/vim-scriptease", cmd = { "Scriptnames", "Message", "Verbose" } })
 
         -- The missing auto-completion for cmdline!
-        use({ "gelguy/wilder.nvim", opt = true, setup = [[vim.cmd('packadd wilder.nvim')]] })
+        use({ "gelguy/wilder.nvim", opt = true, config = [[require('config.wilder']] })
 
         -- showing keybindings
         use({

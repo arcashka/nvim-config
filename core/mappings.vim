@@ -23,10 +23,7 @@ nnoremap<silent> \x :<C-U>windo lclose <bar> cclose<CR>
 
 " Close a buffer and switching to another buffer, do not close the
 " window, see https://stackoverflow.com/q/4465095/6064933
-nnoremap <silent> \d :<C-U>call bprevious <bar> bdelete #<CR>
-
-nnoremap <silent> <Tab> :bnext <CR>
-nnoremap <silent> <S-Tab> :bprevious <CR>
+nnoremap <silent> \d :<C-U>bprevious <bar> bdelete #<CR>
 
 " Insert a blank line below or above current line (do not move the cursor),
 " see https://stackoverflow.com/a/16136133/6064933
